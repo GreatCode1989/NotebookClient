@@ -1,0 +1,255 @@
+{
+  "users": [],
+  "products": [
+    {
+      "id": 1,
+      "image": "1.jpg",
+      "name": "T-shirt Red",
+      "price": 510,
+      "available": true,
+      "category": "Man",
+      "color": "Red",
+      "size": "XL"
+    },
+    {
+      "id": 2,
+      "image": "2.jpg",
+      "name": "T-shirt Black01",
+      "price": 415,
+      "available": true,
+      "category": "Woman",
+      "color": "Black",
+      "size": "S"
+    },
+    {
+      "id": 3,
+      "image": "3.jpg",
+      "name": "T-shirt White03",
+      "price": 420,
+      "available": false,
+      "category": "Man",
+      "color": "White",
+      "size": "L"
+    },
+    {
+      "id": 4,
+      "image": "4.jpg",
+      "name": "T-shirt Black02",
+      "price": 530,
+      "available": true,
+      "category": "Man",
+      "color": "Black",
+      "size": "XL"
+    },
+    {
+      "id": 5,
+      "image": "5.jpg",
+      "name": "T-shirt White",
+      "price": 650,
+      "available": false,
+      "category": "Woman",
+      "color": "White",
+      "size": "M"
+    },
+    {
+      "id": 6,
+      "image": "6.jpg",
+      "name": "T-shirt Pink",
+      "price": 570,
+      "available": true,
+      "category": "Woman",
+      "color": "Pink",
+      "size": "XS"
+    },
+    {
+      "id": 7,
+      "image": "7.jpg",
+      "name": "T-shirt White02",
+      "price": 710,
+      "available": true,
+      "category": "Woman",
+      "color": "White",
+      "size": "XXL"
+    },
+    {
+      "id": 8,
+      "image": "8.jpg",
+      "name": "T-shirt Purple",
+      "price": 835,
+      "available": true,
+      "category": "Man",
+      "color": "Purple",
+      "size": "L"
+    },
+    {
+      "id": 9,
+      "image": "9.jpg",
+      "name": "T-shirt Blue",
+      "price": 620,
+      "available": false,
+      "category": "Man",
+      "color": "Blue",
+      "size": "S"
+    },
+    {
+      "id": 10,
+      "image": "10.jpg",
+      "name": "T-shirt Yellow",
+      "price": 710,
+      "available": true,
+      "category": "Man",
+      "color": "Yellow",
+      "size": "M"
+    },
+    {
+      "id": 11,
+      "image": "11.jpg",
+      "name": "T-shirt Black04",
+      "price": 635,
+      "available": false,
+      "category": "Woman",
+      "color": "Black",
+      "size": "XS"
+    },
+    {
+      "id": 12,
+      "image": "12.jpg",
+      "name": "T-shirt Black05",
+      "price": 570,
+      "available": true,
+      "category": "Woman",
+      "color": "Black",
+      "size": "S"
+    },
+    {
+      "id": 13,
+      "image": "13.jpg",
+      "name": "Jeans Blue07",
+      "price": 210,
+      "available": true,
+      "category": "Man",
+      "color": "Black07",
+      "size": "L"
+    },
+    {
+      "id": 14,
+      "image": "14.jpg",
+      "name": "Jeans Black09",
+      "price": 325,
+      "available": true,
+      "category": "Woman",
+      "color": "Black09",
+      "size": "M"
+    },
+    {
+      "id": 15,
+      "image": "15.jpeg",
+      "name": "Jeans Blue12",
+      "price": 420,
+      "available": false,
+      "category": "Woman",
+      "color": "Blue12",
+      "size": "XL"
+    },
+    {
+      "id": 16,
+      "image": "16.jpg",
+      "name": "Jeans Blue77",
+      "price": 430,
+      "available": true,
+      "category": "Man",
+      "color": "Blue77",
+      "size": "XXL"
+    },
+    {
+      "id": 17,
+      "image": "17.jpeg",
+      "name": "Jeans Gray15",
+      "price": 580,
+      "available": true,
+      "category": "Woman",
+      "color": "Gray15",
+      "size": "M"
+    },
+    {
+      "id": 18,
+      "image": "18.jpg",
+      "name": "Jeans Blue78",
+      "price": 655,
+      "available": false,
+      "category": "Woman",
+      "color": "Blue78",
+      "size": "L"
+    },
+    {
+      "id": 19,
+      "image": "19.jpg",
+      "name": "Jeans Blue42",
+      "price": 610,
+      "available": true,
+      "category": "Man",
+      "color": "Blue42",
+      "size": "S"
+    },
+    {
+      "id": 20,
+      "image": "20.jpg",
+      "name": "Jeans Blue45",
+      "price": 710,
+      "available": true,
+      "category": "Woman",
+      "color": "Blue45",
+      "size": "L"
+    },
+    {
+      "id": 21,
+      "image": "21.jpg",
+      "name": "Jeans Blue14",
+      "price": 630,
+      "available": false,
+      "category": "Woman",
+      "color": "Blue14",
+      "size": "M"
+    },
+    {
+      "id": 22,
+      "image": "22.jpg",
+      "name": "Jeans Black15",
+      "price": 590,
+      "available": true,
+      "category": "Woman",
+      "color": "Black15",
+      "size": "S"
+    },
+    {
+      "id": 23,
+      "image": "23.jpeg",
+      "name": "Jeans Blue55",
+      "price": 225,
+      "available": true,
+      "category": "Woman",
+      "color": "Blue55",
+      "size": "M"
+    },
+    {
+      "id": 24,
+      "image": "24.jpg",
+      "name": "Jeans Gray12",
+      "price": 330,
+      "available": true,
+      "category": "Man",
+      "color": "Gray12",
+      "size": "L"
+    },
+    {
+      "id": 25,
+      "image": "25.jpg",
+      "name": "Jeans Bluelight",
+      "price": 425,
+      "available": false,
+      "category": "Woman",
+      "color": "Bluelight",
+      "size": "XL"
+    }
+  ]
+}
