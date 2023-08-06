@@ -1,32 +1,13 @@
 <template>
   <div class="product-buttons">
-    <button
-      class="remove-from-favorites-button"
-      @click="removeFromFavorites(item)"
-    >
+    <button class="remove-from-favorites-button">
       <img src="../assets/icons/heart.png" alt="heart-icon" class="icon" />
       Удалить из избранного
     </button>
   </div>
 </template>
 
-<script setup>
-import { useStore } from "vuex";
-
-const props = defineProps({
-  item: {
-    type: Number,
-    required: true,
-  },
-});
-
-const store = useStore();
-
-function removeFromFavorites(index) {
-  store.dispatch("removeFromFavorites", index);
-  console.log(index);
-}
-</script>
+<script setup></script>
 
 <style lang="sass" scoped>
 @import '../assets/styles/main'

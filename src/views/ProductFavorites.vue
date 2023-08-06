@@ -21,8 +21,7 @@
             Наличие: {{ item.available ? "Да" : "Нет" }}
           </div>
         </div>
-
-        <ButtonRemove :item="index" />
+        <ButtonRemove @click="removeFromFavorites(index)" />
       </div>
     </div>
   </div>
@@ -32,25 +31,17 @@
 import Navbar from "@/components/Navbar.vue";
 import Header from "../components/Header.vue";
 import ButtonRemove from "@/components/ButtonRemove.vue";
-import { ref, watch, onMounted } from "vue";
+import { ref } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
 
-const cartArray = ref([]);
+const cartArray = ref([...store.state.favorites]);
 
-onMounted(() => {
+function removeFromFavorites(index) {
+  store.dispatch("removeFromFavorites", index);
   cartArray.value = [...store.state.favorites];
-  console.log(cartArray.value);
-});
-
-watch(
-  () => store.state.favorites,
-  (newFavorites) => {
-    cartArray.value = [...newFavorites];
-    console.log(cartArray.value);
-  }
-);
+}
 </script>
 
 <style lang="sass" scoped>

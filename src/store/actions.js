@@ -19,4 +19,5 @@ export function addToFavorites({ commit }, item) {
 
 export function removeFromFavorites({ commit }, index) {
   commit("removeFavorites", index);
+  console.log(index);
 }
