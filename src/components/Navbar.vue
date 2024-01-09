@@ -6,7 +6,7 @@
           Главная
         </router-link>
         <router-link class="nav-link" :to="{ name: 'user' }">
-          Регистрация
+          Регистрация/Вход
         </router-link>
         <router-link class="nav-link" :to="{ name: 'page' }">
           Избранное

@@ -3,6 +3,9 @@ import ProductList from "../views/ProductList.vue";
 import UserRegister from "@/views/UserRegister.vue";
 import ProductFavorites from "../views/ProductFavorites.vue";
 import ProductDetails from "@/views/ProductDetails.vue";
+import UserLogin from "@/views/UserLogin.vue";
+
+
 
 const routes = [
   {
@@ -24,6 +27,11 @@ const routes = [
     path: "/details/:id",
     name: "details",
     component: ProductDetails,
+  },
+  {
+    path: "/login",
+    name: "login",
+    component: UserLogin,
   },
 ];
 
