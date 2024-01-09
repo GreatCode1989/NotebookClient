@@ -15,24 +15,19 @@ export function searchCloth({ commit }) {
 
 export async function loginUser(username, password) {
   try {
-    const response = await axios.post('http://localhost:3000/auth/login', {
-      username: username,
-      password: password,
+    const response = await axios.post('http://localhost:3000/user/login', {
+      ...username,
+      ...password,
+      
     });
 
     if (response.status === 200) {
-      // Успешный вход
-      console.log('Успешный вход:', response.data);
-      return true;
+      return { success: true, message: 'Успешный вход', data: response.data };
     } else {
-      // Неудачная попытка входа
-      console.log('Неудачная попытка входа');
-      return false;
+      return { success: false, message: 'Неудачная попытка входа' };
     }
   } catch (error) {
-    // Обработка ошибок
-    console.error('Ошибка при входе:', error);
-    return false;
+    return { success: false, message: 'Ошибка сервера', error: error };
   }
 }
 

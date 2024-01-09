@@ -7,29 +7,30 @@
     <div>
       <div class="router">
         <p>Еще нет аккаунта?</p>
-        <router-link class="link-auth" to="user">Зарегестрируйтесь!</router-link>
-        </div>
-      <form @submit.prevent="loginUsers">
+        <router-link class="link-auth" to="user">Зарегистрируйтесь!</router-link>
+      </div>
+      <form @submit.prevent="loginUser">
         <div>
           <label for="username">Имя Пользователя:</label>
-          <input type="text" id="username" v-model="formData.username" />
-        </div>
-        <div>
-          <label for="email">Email:</label>
-          <input type="email" id="email" v-model="formData.email" />
+          <input type="text" id="username" v-model="username" />
         </div>
         <div>
           <label for="password">Пароль:</label>
-          <input type="password" id="password" v-model="formData.password" />
+          <input type="password" id="password" v-model="password" />
         </div>
         <div class="button-group">
           <button type="submit">Вход</button>
-          
         </div>
       </form>
       <div>
-        <div v-if="errorMessage" class="success-message">
-          Заполните все поля!
+        <div
+          v-if="errorMessage"
+          :class="{
+            'success-message': isSuccessMessage,
+            'error-message': !isSuccessMessage,
+          }"
+        >
+          {{ errorMessage }}
         </div>
       </div>
     </div>
@@ -38,58 +39,70 @@
 
 <script setup>
 import Header from "@/components/Header.vue";
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, watchEffect } from "vue";
 import { useStore } from "vuex";
 import Navbar from "@/components/Navbar.vue";
-
-const formData = ref({
-  username: "",
-  email: "",
-  password: "",
-});
+import { useRouter } from "vue-router";
 
 const isLoginButtonClicked = ref(false);
-
-const errorMessage = computed(() => {
-  if (isLoginButtonClicked.value) {
-    return !formData.value.username ||
-      !formData.value.email ||
-      !formData.value.password
-      ? "Заполните все поля"
-      : "";
-  }
-  return "";
-});
-
+const errorMessage = ref("");
 const store = useStore();
+const isSuccessMessage = ref(false);
+const router = useRouter();
+
+const username = ref("");
+const password = ref("");
 
 function clearForm() {
-  formData.value.username = "";
-  formData.value.email = "";
-  formData.value.password = "";
+  username.value = "";
+  password.value = "";
 }
 
-function loginUsers() {
+watchEffect(() => {
+  if (isLoginButtonClicked.value) {
+    if (username.value && password.value) {
+      errorMessage.value = ""; 
+    }
+  }
+});
+
+
+function loginUser() {
   isLoginButtonClicked.value = true;
 
-  if (
-    !formData.value.username ||
-    !formData.value.email ||
-    !formData.value.password
-  ) {
+
+  if (!username.value || !password.value) {
+    errorMessage.value = "Заполните все поля";
+    isSuccessMessage.value = false;
     return;
   }
 
+  
+ 
+
   store
-    .dispatch("loginUser", formData.value)
-    .then(() => {
+    .dispatch("loginUser", {
+      username: username.value,
+      password: password.value,
+    })
+    .then((result) => {
       clearForm();
       isLoginButtonClicked.value = false;
-    })
-    .catch((error) => {
-      console.error("Registration failed:", error);
+
+      if (result.success) {
+        if (result.data.warningMessage) {
+          errorMessage.value = result.data.warningMessage;
+        } else {
+          errorMessage.value = "Успешный вход";
+          isSuccessMessage.value = true;
+          router.push({ name: "page" });
+        }
+      } else {
+        errorMessage.value = "Неверный логин или пароль";
+      }
     });
 }
+
 
 onMounted(() => {
   clearForm();
@@ -140,10 +153,10 @@ button[type="submit"]
   border-radius: 5px
   cursor: pointer
 
-button:hover 
+button:hover
   background-color: #0099ff
 
-.success-message
+.error-message
   display: flex
   justify-content: center
   margin: 0 auto
@@ -155,8 +168,20 @@ button:hover
   border: 1px solid #c3e6cb
   border-radius: 5px
   font-size: 20px
-  
-.router 
+
+.success-message
+  display: flex
+  justify-content: center
+  margin: 0 auto
+  margin-top: 20px
+  padding: 10px
+  width: 390px
+  background-color: #ffffff
+  color: #00a046
+  border: 1px solid #c3e6cb
+  border-radius: 5px
+  font-size: 20px
+.router
   display: flex
   justify-content: center
   align-items: center
@@ -167,7 +192,7 @@ p
   font-size: 18px
   margin-bottom: 10px
   margin-right: 15px
-  
+
 
 .link-auth
   text-decoration: none
@@ -177,7 +202,6 @@ p
   margin-top: 8px
   font-weight: bold
 
-.link-auth:hover 
+.link-auth:hover
   color: #ca38b2
-  
 </style>
