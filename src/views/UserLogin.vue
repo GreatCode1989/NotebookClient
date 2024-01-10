@@ -95,7 +95,7 @@ function loginUser() {
         } else {
           errorMessage.value = "Успешный вход";
           isSuccessMessage.value = true;
-          router.push({ name: "page" });
+          router.push({ name: "list" });
         }
       } else {
         errorMessage.value = "Неверный логин или пароль";

@@ -76,7 +76,18 @@ const selectCategory = (category) => {
 };
 
 function clothRandom() {
-  store.dispatch("searchCloth");
+  store.dispatch("searchCloth", {
+    limit: 25, 
+    offset: 1, 
+  })
+  .then((data) => {
+    
+    console.log("Данные успешно получены:", data);
+  })
+  .catch((error) => {
+   
+    console.error("Ошибка при получении данных:", error);
+  });
 }
 
 onMounted(() => {

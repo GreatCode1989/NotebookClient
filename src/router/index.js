@@ -1,15 +1,20 @@
 import { createRouter, createWebHistory } from "vue-router";
-import ProductList from "../views/ProductList.vue";
+
 import UserRegister from "@/views/UserRegister.vue";
 import ProductFavorites from "../views/ProductFavorites.vue";
 import ProductDetails from "@/views/ProductDetails.vue";
 import UserLogin from "@/views/UserLogin.vue";
-
-
+import HomePage from "@/views/HomePage.vue";
+import ProductList from "../views/ProductList.vue";
 
 const routes = [
   {
     path: "/",
+    name: "home",
+    component: HomePage,
+  },
+  {
+    path: "/list",
     name: "list",
     component: ProductList,
   },

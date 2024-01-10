@@ -1,17 +1,6 @@
 import axios from "axios";
 
-export function searchCloth({ commit }) {
-  axios
-    .get("http://localhost:3000/products")
-    .then((response) => {
-      const data = response.data;
 
-      commit("searchRandom", data);
-    })
-    .catch((error) => {
-      console.log(error);
-    });
-}
 
 export async function loginUser(username, password) {
   try {
@@ -49,4 +38,22 @@ export async function registerUser(username, password, email) {
   } catch (error) {
     return { success: false, message: 'Ошибка при регистрации', error: error };
   }
+}
+export async function searchCloth({ commit }, { limit, offset }) {
+  return await axios
+    .get("http://localhost:3000/boiler-parts", {
+      params: {
+        limit,
+        offset,
+      },
+    })
+    .then((response) => {
+      const data = response.data;
+      commit("searchRandom", data);
+      return data; 
+    })
+    .catch((error) => {
+      console.error(error);
+      throw error; 
+    });
 }
