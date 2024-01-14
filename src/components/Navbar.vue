@@ -2,14 +2,14 @@
   <div>
     <div class="navbar">
       <div class="nav-item">
-        <router-link class="nav-link" :to="{ name: 'list' }">
+        <router-link class="nav-link" :to="{ name: 'home' }">
           Главная
         </router-link>
         <router-link class="nav-link" :to="{ name: 'user' }">
           Регистрация/Вход
         </router-link>
         <router-link class="nav-link" :to="{ name: 'page' }">
-          Избранное
+          Корзина
         </router-link>
       </div>
     </div>

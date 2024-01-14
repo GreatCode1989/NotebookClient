@@ -14,9 +14,9 @@
       </div>
     </div>
 
-  <div class="product-list">
-    <div v-if="items && items.rows">
-      <div v-for="item in items.rows" :key="item.id" class="card">
+  <div >
+    <div v-if="items && items.rows"  class="product-list">
+      <div v-for="item in items.rows" :key="item.id"  class="product-item">
         <router-link :to="{ name: 'details', params: { id: item.id } }">
           <img
             :src="require(`../assets/img/${item.images}.jpg`)"
@@ -28,7 +28,7 @@
           <div class="product-name">{{ item.name }}</div>
           <div class="product-price">Цена: {{ item.price }} грн.</div>
           <div class="product-availability">
-            Наличие: {{ item.in_stock > 0 ? "Да" : "Нет" }}
+            Наличие: {{ item.in_stock ? "Да" : "Нет" }}
           </div>
           <ButtonAdd :item="item" />
         </div>
@@ -38,6 +38,7 @@
       Загрузка данных...
     </div>
   </div>
+  
   </div>
 </template>
 
@@ -54,12 +55,24 @@
   display: flex
   flex-wrap: wrap
   justify-content: center
+  
+
+.product-item
+  margin: 20px
+  padding: 10px
+  border: 1px solid #ccc
+  border-radius: 5px
+  width: 200px
+ 
+  
+  
 
 .product-image
   width: 100%
-  height: 150px
   object-fit: cover
+  object-position: center 10%
   border-radius: 5px
+  max-height: 150px
 
 
 .product-details 
@@ -82,6 +95,7 @@
 </style>
 
 <script setup>
+import Navbar from "@/components/Navbar.vue";
 import { ref, onMounted } from "vue";
 import { useStore } from "vuex";
 import Header from "../components/Header.vue";
@@ -92,6 +106,12 @@ import Search from "../components/Search.vue";
 const store = useStore();
 
 const items = ref();
+
+const searchedName = ref("");
+
+const searchName = (name) => {
+  searchedName.value = name;
+};
 
 function clothRandom() {
   store
@@ -107,6 +127,8 @@ function clothRandom() {
       console.error("Ошибка при получении данных:", error);
     });
 }
+
+
 
 onMounted(() => {
   clothRandom();

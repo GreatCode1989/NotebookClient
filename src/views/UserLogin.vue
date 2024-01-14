@@ -7,7 +7,9 @@
     <div>
       <div class="router">
         <p>Еще нет аккаунта?</p>
-        <router-link class="link-auth" to="user">Зарегистрируйтесь!</router-link>
+        <router-link class="link-auth" to="user"
+          >Зарегистрируйтесь!</router-link
+        >
       </div>
       <form @submit.prevent="loginUser">
         <div>
@@ -16,11 +18,19 @@
         </div>
         <div>
           <label for="password">Пароль:</label>
-          <input type="password" id="password" v-model="password" />
+          <input
+            :type="showPassword ? 'text' : 'password'"
+            id="password"
+            v-model="password"
+          />
+          <div class="button-input">
+            <button type="button" @click="toggleShowPassword">
+              {{ showPassword ? "Скрыть" : "Показать" }}
+            </button>
+          </div>
         </div>
-        <div class="button-group">
-          <button type="submit">Вход</button>
-        </div>
+
+        <button type="submit">Вход</button>
       </form>
       <div>
         <div
@@ -52,6 +62,11 @@ const router = useRouter();
 
 const username = ref("");
 const password = ref("");
+const showPassword = ref(false);
+
+function toggleShowPassword() {
+  showPassword.value = !showPassword.value;
+}
 
 function clearForm() {
   username.value = "";
@@ -59,26 +74,19 @@ function clearForm() {
 }
 
 watchEffect(() => {
-  if (isLoginButtonClicked.value) {
-    if (username.value && password.value) {
-      errorMessage.value = ""; 
-    }
+  if (username.value && password.value) {
+    errorMessage.value = "";
   }
 });
-
 
 function loginUser() {
   isLoginButtonClicked.value = true;
 
-
   if (!username.value || !password.value) {
-    errorMessage.value = "Заполните все поля";
+    errorMessage.value = "Заполните все поля!";
     isSuccessMessage.value = false;
     return;
   }
-
-  
- 
 
   store
     .dispatch("loginUser", {
@@ -93,16 +101,18 @@ function loginUser() {
         if (result.data.warningMessage) {
           errorMessage.value = result.data.warningMessage;
         } else {
-          errorMessage.value = "Успешный вход";
+          errorMessage.value = "Успешный вход!";
           isSuccessMessage.value = true;
-          router.push({ name: "list" });
+          console.log(document.cookie);
+          console.log(result.data);
+
+          // router.push({ name: "home" });
         }
       } else {
-        errorMessage.value = "Неверный логин или пароль";
+        errorMessage.value = "Неверный логин или пароль!";
       }
     });
 }
-
 
 onMounted(() => {
   clearForm();
@@ -146,21 +156,20 @@ input[type="email"]
 button[type="submit"]
   padding: 10px 20px
   font-size: 16px
+  margin-top: 10px
   background-color: #007bff
   color: #fff
   border: none
-  margin-top: 15px
   border-radius: 5px
   cursor: pointer
 
-button:hover
+button[type="submit"]:hover
   background-color: #0099ff
 
 .error-message
   display: flex
   justify-content: center
   margin: 0 auto
-  margin-top: 20px
   padding: 10px
   width: 390px
   background-color: #ffffff
@@ -173,7 +182,6 @@ button:hover
   display: flex
   justify-content: center
   margin: 0 auto
-  margin-top: 20px
   padding: 10px
   width: 390px
   background-color: #ffffff
@@ -193,7 +201,6 @@ p
   margin-bottom: 10px
   margin-right: 15px
 
-
 .link-auth
   text-decoration: none
   font-size: 18px
@@ -204,4 +211,13 @@ p
 
 .link-auth:hover
   color: #ca38b2
+
+button[type="button"]
+  margin-top: 7px
+  cursor: pointer
+
+.button-input
+  margin-bottom: 0px
+  display: flex
+  align-items: flex-end
 </style>

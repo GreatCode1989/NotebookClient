@@ -20,8 +20,31 @@
         </div>
         <div>
           <label for="password">Пароль:</label>
-          <input type="password" id="password" v-model="password" />
+          <input
+            :type="showPassword ? 'text' : 'password'"
+            id="password"
+            v-model="password"
+          />
+          <div class="button-input">
+            <button type="button" @click="toggleShowPassword">
+              {{ showPassword ? "Скрыть" : "Показать" }}
+            </button>
+          </div>
         </div>
+        <div>
+          <label for="confirmPassword">Повторите пароль:</label>
+          <input
+            :type="showConfirmPassword ? 'text' : 'password'"
+            id="confirmPassword"
+            v-model="confirmPassword"
+          />
+          <div class="button-input">
+            <button type="button" @click="toggleShowConfirmPassword">
+              {{ showConfirmPassword ? "Скрыть" : "Показать" }}
+            </button>
+          </div>
+        </div>
+
         <div class="button-group">
           <button type="submit">Регистрация</button>
         </div>
@@ -43,7 +66,7 @@
 
 <script setup>
 import Header from "@/components/Header.vue";
-import { ref, onMounted, watchEffect } from "vue";
+import { ref, onMounted, watchEffect, nextTick } from "vue";
 import { useStore } from "vuex";
 import Navbar from "@/components/Navbar.vue";
 import { useRouter } from "vue-router";
@@ -57,6 +80,9 @@ const router = useRouter();
 const username = ref("");
 const email = ref("");
 const password = ref("");
+const confirmPassword = ref("");
+const showPassword = ref(false);
+const showConfirmPassword = ref(false);
 
 function clearForm() {
   username.value = "";
@@ -64,29 +90,50 @@ function clearForm() {
   password.value = "";
 }
 
+function toggleShowPassword() {
+  showPassword.value = !showPassword.value;
+}
+
+function toggleShowConfirmPassword() {
+  showConfirmPassword.value = !showConfirmPassword.value;
+}
+
 watchEffect(() => {
-  if (isRegistrationButtonClicked.value) {
-    if (username.value && email.value && password.value) {
-      errorMessage.value = ""; 
-    }
+  if (
+    username.value &&
+    email.value &&
+    password.value &&
+    confirmPassword.value
+  ) {
+    errorMessage.value = "";
   }
 });
-
 
 function registerUsers() {
   isRegistrationButtonClicked.value = true;
 
   const passwordRegex = /^(?=.*\d)(?=.*[A-Z]).{8,}$/;
 
-  if (!username.value || !email.value || !password.value) {
-    errorMessage.value = "Заполните все поля";
+  if (
+    !username.value ||
+    !email.value ||
+    !password.value ||
+    !confirmPassword.value
+  ) {
+    errorMessage.value = "Заполните все поля!";
     isSuccessMessage.value = false;
     return;
   }
 
-  
+  if (password.value !== confirmPassword.value) {
+    errorMessage.value = "Пароли не совпадают!";
+    isSuccessMessage.value = false;
+    return;
+  }
+
   if (!passwordRegex.test(password.value)) {
-    errorMessage.value = "Пароль должен содержать минимум 8 символов, цифры и заглавные буквы";
+    errorMessage.value =
+      "Пароль должен содержать минимум 8 символов, цифры и заглавные буквы!";
     isSuccessMessage.value = false;
     return;
   }
@@ -97,15 +144,17 @@ function registerUsers() {
       password: password.value,
       email: email.value,
     })
-    .then((result) => {
+    .then(async (result) => {
       clearForm();
       isRegistrationButtonClicked.value = false;
+
+      await nextTick();
 
       if (result.success) {
         if (result.data.warningMessage) {
           errorMessage.value = result.data.warningMessage;
         } else {
-          errorMessage.value = "Успешная регистрация";
+          errorMessage.value = "Успешная регистрация!";
           isSuccessMessage.value = true;
           router.push({ name: "login" });
         }
@@ -114,7 +163,6 @@ function registerUsers() {
       }
     });
 }
-
 
 onMounted(() => {
   clearForm();
@@ -165,14 +213,13 @@ button[type="submit"]
   border-radius: 5px
   cursor: pointer
 
-button:hover
+button[type="submit"]:hover
   background-color: #0099ff
 
 .error-message
   display: flex
   justify-content: center
   margin: 0 auto
-  margin-top: 20px
   padding: 10px
   width: 390px
   background-color: #ffffff
@@ -185,7 +232,6 @@ button:hover
   display: flex
   justify-content: center
   margin: 0 auto
-  margin-top: 20px
   padding: 10px
   width: 390px
   background-color: #ffffff
@@ -216,4 +262,13 @@ p
 
 .link-auth:hover
   color: #ca38b2
+
+button[type="button"]
+  margin-top: 7px
+  cursor: pointer
+
+.button-input
+  margin-bottom: 0
+  display: flex
+  align-items: flex-end 
 </style>

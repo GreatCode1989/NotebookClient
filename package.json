@@ -9,6 +9,7 @@
   "dependencies": {
     "axios": "^1.4.0",
     "core-js": "^3.8.3",
+    "js-cookie": "^3.0.5",
     "json-serve": "^0.1.0",
     "json-server": "^0.17.3",
     "vue": "^3.4.5",
@@ -16,6 +17,7 @@
     "vuex": "^4.0.0"
   },
   "devDependencies": {
+    "@types/js-cookie": "^3.0.6",
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-router": "~5.0.0",
     "@vue/cli-plugin-vuex": "~5.0.0",

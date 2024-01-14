@@ -5,7 +5,7 @@
       class="search-input"
       v-model="searchItem"
       @change="updateItem"
-      placeholder="Поиск T-shirt и Jeans "
+      placeholder="Поиск... "
     />
     <img
       class="img-search"
