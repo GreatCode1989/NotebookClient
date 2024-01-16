@@ -2,8 +2,8 @@
   <div>
     <div class="navbar">
       <div class="nav-item">
-        <router-link class="nav-link" :to="{ name: 'home' }">
-          Главная
+        <router-link class="nav-link" :to="{ name: 'home' }" >
+          Каталог товаров
         </router-link>
         <router-link class="nav-link" :to="{ name: 'user' }">
           Регистрация/Вход
@@ -16,7 +16,8 @@
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+</script>
 
 <style lang="sass" scoped>
 @import '../assets/styles/main'

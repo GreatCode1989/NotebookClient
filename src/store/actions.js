@@ -37,7 +37,7 @@ export async function registerUser(username, password, email) {
     return { success: false, message: "Ошибка при регистрации", error: error };
   }
 }
-export async function searchCloth({ commit }, { limit, offset }) {
+export async function getAllCloth({ commit }, { limit, offset }) {
   return await axios
     .get("http://localhost:3000/boiler-parts", {
       params: {
@@ -79,3 +79,36 @@ export async function fetchClothPartDetails({ commit }, id) {
     };
   }
 }
+export async function searchCloth({commit}, search) {
+  try {
+    const response = await axios.post("http://localhost:3000/boiler-parts/search", {
+      ...search,
+    });
+    const data = response.data;
+    commit("searchCloth", data);
+    return data;
+ 
+  } catch (error) {
+    console.error(error);
+      throw error;
+  }
+}
+export async function selectCloth({ commit }, value) {
+
+  let url = `http://localhost:3000/boiler-parts/${value}`;
+
+  return await axios
+    .get(url)
+    .then((response) => {
+      const data = response.data;
+      console.log(data);
+      commit("selectCloth", data);
+      return data;
+    })
+    .catch((error) => {
+      console.error(error);
+      throw error;
+    });
+}
+
+
