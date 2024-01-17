@@ -5,13 +5,21 @@
       class="search-input"
       v-model="searchItem"
       @change="searchCloth"
-      placeholder="Поиск по всем товарам... "
+      placeholder="Поиск по всем коллекциям... "
     />
     <img
+      v-show="!isSearchPerformed"
       class="img-search"
       src="../assets/img/search.png"
       alt=""
       @click="searchCloth"
+    />
+    <img
+      @click="resetSearch"
+      v-show="isSearchPerformed"
+      class="img-search"
+      src="../assets/img/delete.png"
+      alt=""
     />
   </div>
 </template>
@@ -23,28 +31,57 @@ import { useStore } from "vuex";
 const store = useStore();
 
 const searchItem = ref("");
-const items = ref()
+const items = ref();
+const isSearchPerformed = ref(false);
 
 const emit = defineEmits();
 
-function searchCloth() {
+function resetSearch() {
+  if (searchItem.value.length > 0 && isSearchPerformed.value) {
+    clothRandom();
+    searchItem.value = "";
+    isSearchPerformed.value = false;
+  }
+}
+
+function clothRandom() {
   store
-    .dispatch("searchCloth", {
-      search: searchItem.value,
+    .dispatch("getAllCloth", {
+      limit: 35,
+      offset: 0,
     })
     .then((data) => {
       items.value = data;
+      emit("searchName", items.value);
       console.log("Данные успешно получены:", data);
-      emit("searchName", items.value)
     })
     .catch((error) => {
       console.error("Ошибка при получении данных:", error);
     });
 }
+
+function searchCloth() {
+  if (searchItem.value.length > 0) {
+    store
+      .dispatch("searchCloth", {
+        search: searchItem.value,
+      })
+      .then((data) => {
+        items.value = data;
+        isSearchPerformed.value = true;
+        emit("searchName", items.value);
+        console.log("Данные успешно получены:", data);
+      })
+      .catch((error) => {
+        console.error("Ошибка при получении данных:", error);
+      });
+  }
+}
 </script>
 
 <style lang="sass" scoped>
 @import '../assets/styles/main'
+
 
 .search-container
     display: flex
@@ -62,6 +99,7 @@ function searchCloth() {
   cursor: pointer
 
 .search-input
+  
   width: 300px
   padding: 10px
   border: 1px solid #ccc

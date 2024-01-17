@@ -2,19 +2,38 @@
   <div>
     <Header :title="'ЛУЧШИЕ БРЕНДЫ'" />
     <div>
-      <Navbar/>
+      <Navbar />
     </div>
     <div>
-      <div>
-        <Search @searchName="searchName($event)" />
+      <div class="search-container">
+        <input
+          type="text"
+          class="search-input"
+          :value="searchItem"
+          @input="updateSearchItem"
+          placeholder="Поиск... "
+        />
+        <img
+          v-show="!isSearchPerformed"
+          class="img-search"
+          src="../assets/img/search.png"
+          alt=""
+          @click="searchCloth"
+        />
+        <img
+          @click="resetSearch"
+          v-show="isSearchPerformed"
+          class="img-search"
+          src="../assets/img/delete.png"
+          alt=""
+        />
       </div>
       <div>
-        <Select @selectItem="selectItem($event)" :value="value" />
-        
+        <Select @selectItem="selectItem($event)" />
         <div class="filter-price">
           <div>
             <label class="label-filter" for="sortUp"
-              >Сортировать по возрастанию:</label
+              >Сортировать по возрастанию цены:</label
             >
             <input
               class="input-filter"
@@ -26,7 +45,7 @@
           </div>
           <div>
             <label class="label-filter" for="sortDown"
-              >Сортировать по убыванию:</label
+              >Сортировать по убыванию цены:</label
             >
             <input
               class="input-filter"
@@ -42,7 +61,7 @@
             </button>
           </div>
           <div>
-            <button class="button-reset" @click="resetFilter">
+            <button class="button-reset" @click="resetFilterPrice">
               Сбросить фильтр
             </button>
           </div>
@@ -77,16 +96,14 @@
 
 <script setup>
 import Navbar from "@/components/Navbar.vue";
-import { ref, onMounted } from "vue";
-import { useStore } from "vuex";
+import { ref } from "vue";
 import Header from "../components/Header.vue";
 import ButtonAdd from "../components/ButtonAdd.vue";
 import Select from "../components/Select.vue";
-import Search from "../components/Search.vue";
-
-const store = useStore();
 
 const items = ref();
+const selectedCollection = ref();
+const searchItem = ref("");
 const sortDown = ref(false);
 const sortUp = ref(false);
 
@@ -110,43 +127,65 @@ const filterByPrice = () => {
   }
 };
 
-const resetFilter = () => {
+const resetFilterPrice = () => {
   sortUp.value = false;
   sortDown.value = false;
   items.value.rows = [...items.value.rows].sort(() => Math.random() - 0.5);
 };
 
-const searchName = (event) => {
-  items.value = event;
+const updateSearchItem = (event) => {
+  searchItem.value = event.target.value;
 };
 
-const selectItem = (event) => {
-  items.value = event;
+const searchCloth = () => {
+  if (searchItem.value.length > 0) {
+    const filteredResults = items.value.rows.filter((item) =>
+      item.name.toLowerCase().includes(searchItem.value.toLowerCase())
+    );
+    items.value = { ...items.value, rows: filteredResults };
+  }
 };
 
-
-function clothRandom() {
-  store
-    .dispatch("getAllCloth", {
-      limit: 35,
-      offset: 0,
-    })
-    .then((data) => {
-      items.value = data;
-      console.log("Данные успешно получены:", data);
-    })
-    .catch((error) => {
-      console.error("Ошибка при получении данных:", error);
-    });
+function resetSearch() {
+  if (searchItem.value.length > 0) {
+    items.value = selectedCollection.value;
+    searchItem.value = "";
+  }
 }
 
-onMounted(() => {
-  clothRandom();
-});
+const selectItem = (event) => {
+  selectedCollection.value = event;
+  items.value = event;
+};
 </script>
 
 <style lang="sass" scoped>
 @import '../assets/styles/main'
+
+
+.search-container
+    display: flex
+    position: relative
+    align-items: center
+    justify-content: center
+    margin: 10px
+
+.img-search
+  position: absolute
+  justify-content: center
+  bottom: 4px
+  width: 30px
+  margin-left: 250px
+  cursor: pointer
+
+.search-input
+
+  width: 300px
+  padding: 10px
+  border: 1px solid #ccc
+  border-radius: 4px
+  font-size: 16px
+  transition: border-color 0.2s ease
 .card
   border: 1px solid #ddd
   padding: 10px
