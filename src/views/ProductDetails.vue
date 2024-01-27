@@ -10,16 +10,16 @@
         <div class="product-details">
           <div>
             <img
-              v-if="clothPartDetails.images"
-              :src="require(`../assets/img/${clothPartDetails.images}.jpg`)"
-              :alt="clothPartDetails.name"
+              v-if="clothPartDetails.image"
+              :src="require(`../assets/img/${clothPartDetails.image[0]}.jpg`)"
+              :alt="clothPartDetails.text"
               class="product-image"
             />
           </div>
 
           <div class="product-info">
             <div class="product-name">
-              {{ clothPartDetails.name }}
+              {{ clothPartDetails.text }}
             </div>
 
             <div class="product-price" v-if="clothPartDetails.price">
@@ -28,7 +28,7 @@
 
             <div class="product-availability">
               Наличие в магазине:
-              <span> {{ clothPartDetails.bestseller ? "Да" : "Нет" }}</span>
+              <span> {{ clothPartDetails.in_shop ? "Да" : "Нет" }}</span>
             </div>
 
             <div>
@@ -36,13 +36,13 @@
               <span>{{ clothPartDetails.in_stock }} шт.</span>
             </div>
             <div>
-              Размер: <span>{{ clothPartDetails.popularity }}</span>
+              Размер: <span>{{ clothPartDetails.size }}</span>
             </div>
             <div>
-              Совместимость: <span> {{ clothPartDetails.compatibility }}</span>
+              Пол: <span> {{ clothPartDetails.old ? "Женский" : "Мужской" }}</span>
             </div>
             <div>
-              Описание: <span>{{ clothPartDetails.description }}</span>
+               <span>{{ clothPartDetails.description }}</span>
             </div>
             <div class="button">
 
@@ -100,7 +100,7 @@ onMounted(async () => {
   box-shadow: 0 0 5px 5px $gray2
 
 .product-image
-  width: 400px
+  width: 500px
   border-radius: 3px 3px
   margin-right: 50px
   box-shadow: 0 0 5px 5px  $bluelight

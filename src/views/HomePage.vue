@@ -5,6 +5,7 @@
       <Navbar />
     </div>
     <div>
+      <!-- Search -->
       <div class="search-container">
         <input
           type="text"
@@ -28,6 +29,7 @@
           alt=""
         />
       </div>
+      <!-- Select -->
       <div>
         <Select @selectItem="selectItem($event)" />
         <div class="filter-price">
@@ -68,22 +70,22 @@
         </div>
       </div>
     </div>
-
+    <!-- Main -->
     <div>
-      <div v-if="items && items.rows" class="product-list">
-        <div v-for="item in items.rows" :key="item.id" class="product-item">
-          <router-link :to="{ name: 'details', params: { id: item.id } }">
+      <div v-if="items && items" class="product-list">
+        <div v-for="item in items" :key="item._id" class="product-item">
+          <router-link :to="{ name: 'details', params: { id: item._id } }">
             <img
-              :src="require(`../assets/img/${item.images}.jpg`)"
+              :src="require(`../assets/img/${item.image[0]}.jpg`)"
               :alt="item.name"
               class="product-image"
             />
           </router-link>
           <div class="product-details">
-            <div class="product-name">{{ item.name }}</div>
+            <div class="product-name">{{ item.text }}</div>
             <div class="product-price">Цена: {{ item.price }} грн.</div>
             <div class="product-availability">
-              Наличие: {{ item.in_stock ? "Да" : "Нет" }}
+              Наличие: {{ item.in_shop ? "Да" : "Нет" }}
             </div>
             <ButtonAdd :item="item" />
           </div>
@@ -104,6 +106,7 @@ import Select from "../components/Select.vue";
 const items = ref();
 const selectedCollection = ref();
 const searchItem = ref("");
+const isSearchPerformed = ref(false);
 const sortDown = ref(false);
 const sortUp = ref(false);
 
@@ -120,17 +123,17 @@ const handleCheckboxChange = () => {
 const filterByPrice = () => {
   if (sortUp.value) {
     sortDown.value = false;
-    items.value.rows.sort((a, b) => a.price - b.price);
+    items.value.sort((a, b) => a.price - b.price);
   } else if (sortDown.value) {
     sortUp.value = false;
-    items.value.rows.sort((a, b) => b.price - a.price);
+    items.value.sort((a, b) => b.price - a.price);
   }
 };
 
 const resetFilterPrice = () => {
   sortUp.value = false;
   sortDown.value = false;
-  items.value.rows = [...items.value.rows].sort(() => Math.random() - 0.5);
+  items.value = [...items.value].sort(() => Math.random() - 0.5);
 };
 
 const updateSearchItem = (event) => {
@@ -139,19 +142,21 @@ const updateSearchItem = (event) => {
 
 const searchCloth = () => {
   if (searchItem.value.length > 0) {
-    const filteredResults = items.value.rows.filter((item) =>
-      item.name.toLowerCase().includes(searchItem.value.toLowerCase())
+    const filteredResults = items.value.filter((item) =>
+      item.text.toLowerCase().includes(searchItem.value.toLowerCase())
     );
-    items.value = { ...items.value, rows: filteredResults };
+    items.value = filteredResults;
+    isSearchPerformed.value = true;
   }
 };
 
-function resetSearch() {
+const resetSearch = () => {
   if (searchItem.value.length > 0) {
     items.value = selectedCollection.value;
     searchItem.value = "";
+    isSearchPerformed.value = false;
   }
-}
+};
 
 const selectItem = (event) => {
   selectedCollection.value = event;
@@ -217,6 +222,7 @@ const selectItem = (event) => {
   margin-top: 10px
 
 .product-name
+  margin-bottom: 10px
   font-size: 18px
   font-weight: bold
 

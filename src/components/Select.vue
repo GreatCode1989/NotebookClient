@@ -6,9 +6,9 @@
       @change="selectToCloth"
       :class="{ 'readonly': selectedCategory === '' }"
     >
-      <option value="">Все коллекции</option>
-      <option value="new">Показать новую коллекцию</option>
-      <option value="bestsellers">Показать старую коллекцию</option>
+      <option value="">Все</option>
+      <option value="popularity">Мужские</option>
+      <option value="old">Женские</option>
     </select>
     <div>
       <button style="cursor: pointer" @click="resetSelect">
@@ -40,10 +40,7 @@ function saveSelectedCategoryToSessionStorage(category) {
 
 const clothRandom = () => {
   store
-    .dispatch("getAllCloth", {
-      limit: 35,
-      offset: 0,
-    })
+    .dispatch("getAllCloth")
     .then((data) => {
       items.value = data;
       emit("selectItem", items.value);

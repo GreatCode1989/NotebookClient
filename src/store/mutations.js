@@ -1,8 +1,4 @@
-export function searchRandom(state, products) {
-  state.products = products;
-}
-
-export function searchCloth(state, products) {
+export function getAllRandom(state, products) {
   state.products = products;
 }
 
