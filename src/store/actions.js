@@ -43,7 +43,7 @@ export async function getAllCloth({ commit }) {
     })
     .then((response) => {
       const data = response.data;
-      commit("getllRandom", data);
+      commit("getAllRandom", data);
       return data;
     })
     .catch((error) => {

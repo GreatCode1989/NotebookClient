@@ -2,12 +2,12 @@
   <div>
     <Header />
     <div>
-      <Navbar />
+      <NavbarMenu />
     </div>
     <div>
       <div class="router">
         <p>Еще нет аккаунта?</p>
-        <router-link class="link-auth" to="user"
+        <router-link class="link-auth" to="register"
           >Зарегистрируйтесь!</router-link
         >
       </div>
@@ -51,7 +51,7 @@
 import Header from "@/components/Header.vue";
 import { ref, onMounted, watchEffect } from "vue";
 import { useStore } from "vuex";
-import Navbar from "@/components/Navbar.vue";
+import NavbarMenu from "@/components/NavbarMenu.vue";
 import { useRouter } from "vue-router";
 
 const isLoginButtonClicked = ref(false);
@@ -106,7 +106,7 @@ function loginUser() {
           console.log(document.cookie);
           console.log(result.data);
 
-          // router.push({ name: "home" });
+          router.push({ name: "catalog" });
         }
       } else {
         errorMessage.value = "Неверный логин или пароль!";

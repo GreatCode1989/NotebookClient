@@ -2,33 +2,9 @@
   <div>
     <Header :title="'ЛУЧШИЕ БРЕНДЫ'" />
     <div>
-      <Navbar />
+      <NavbarMenu @searchName="searchName($event)"/>
     </div>
     <div>
-      <!-- Search -->
-      <div class="search-container">
-        <input
-          type="text"
-          class="search-input"
-          :value="searchItem"
-          @input="updateSearchItem"
-          placeholder="Поиск... "
-        />
-        <img
-          v-show="!isSearchPerformed"
-          class="img-search"
-          src="../assets/img/search.png"
-          alt=""
-          @click="searchCloth"
-        />
-        <img
-          @click="resetSearch"
-          v-show="isSearchPerformed"
-          class="img-search"
-          src="../assets/img/delete.png"
-          alt=""
-        />
-      </div>
       <!-- Select -->
       <div>
         <Select @selectItem="selectItem($event)" />
@@ -97,7 +73,7 @@
 </template>
 
 <script setup>
-import Navbar from "@/components/Navbar.vue";
+import NavbarMenu from "@/components/NavbarMenu.vue";
 import { ref } from "vue";
 import Header from "../components/Header.vue";
 import ButtonAdd from "../components/ButtonAdd.vue";
@@ -105,8 +81,6 @@ import Select from "../components/Select.vue";
 
 const items = ref();
 const selectedCollection = ref();
-const searchItem = ref("");
-const isSearchPerformed = ref(false);
 const sortDown = ref(false);
 const sortUp = ref(false);
 
@@ -136,27 +110,9 @@ const resetFilterPrice = () => {
   items.value = [...items.value].sort(() => Math.random() - 0.5);
 };
 
-const updateSearchItem = (event) => {
-  searchItem.value = event.target.value;
-};
-
-const searchCloth = () => {
-  if (searchItem.value.length > 0) {
-    const filteredResults = items.value.filter((item) =>
-      item.text.toLowerCase().includes(searchItem.value.toLowerCase())
-    );
-    items.value = filteredResults;
-    isSearchPerformed.value = true;
-  }
-};
-
-const resetSearch = () => {
-  if (searchItem.value.length > 0) {
-    items.value = selectedCollection.value;
-    searchItem.value = "";
-    isSearchPerformed.value = false;
-  }
-};
+const searchName = (event) => {
+  items.value = event;
+} 
 
 const selectItem = (event) => {
   selectedCollection.value = event;
@@ -167,30 +123,6 @@ const selectItem = (event) => {
 <style lang="sass" scoped>
 @import '../assets/styles/main'
 
-
-.search-container
-    display: flex
-    position: relative
-    align-items: center
-    justify-content: center
-    margin: 10px
-
-.img-search
-  position: absolute
-  justify-content: center
-  bottom: 4px
-  width: 30px
-  margin-left: 250px
-  cursor: pointer
-
-.search-input
-
-  width: 300px
-  padding: 10px
-  border: 1px solid #ccc
-  border-radius: 4px
-  font-size: 16px
-  transition: border-color 0.2s ease
 .card
   border: 1px solid #ddd
   padding: 10px

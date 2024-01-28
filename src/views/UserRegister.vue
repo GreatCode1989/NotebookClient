@@ -2,7 +2,7 @@
   <div>
     <Header />
     <div>
-      <Navbar />
+      <NavbarMenu />
     </div>
     <div>
       <div class="router">
@@ -68,7 +68,7 @@
 import Header from "@/components/Header.vue";
 import { ref, onMounted, watchEffect, nextTick } from "vue";
 import { useStore } from "vuex";
-import Navbar from "@/components/Navbar.vue";
+import NavbarMenu from "@/components/NavbarMenu.vue";
 import { useRouter } from "vue-router";
 
 const isRegistrationButtonClicked = ref(false);

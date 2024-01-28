@@ -2,7 +2,7 @@
   <div>
     <Header :title="'ИЗБРАННОЕ'" />
     <div>
-      <Navbar />
+      <NavbarMenu />
     </div>
 
     <div class="product-list">
@@ -28,7 +28,7 @@
 </template>
 
 <script setup>
-import Navbar from "@/components/Navbar.vue";
+import NavbarMenu from "@/components/NavbarMenu.vue";
 import Header from "../components/Header.vue";
 import ButtonRemove from "@/components/ButtonRemove.vue";
 import { ref } from "vue";

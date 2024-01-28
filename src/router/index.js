@@ -1,42 +1,60 @@
 import { createRouter, createWebHistory } from "vue-router";
 
 import UserRegister from "@/views/UserRegister.vue";
-import ProductFavorites from "../views/ProductFavorites.vue";
-import ProductDetails from "@/views/ProductDetails.vue";
 import UserLogin from "@/views/UserLogin.vue";
-import HomePage from "@/views/HomePage.vue";
-import ProductList from "../views/ProductList.vue";
+import DetailsPage from "@/views/DetailsPage.vue";
+import CatalogPage from "@/views/CatalogPage.vue";
+import ResumePage from "@/views/ResumePage.vue";
+import ProfilePage from "@/views/ProfilePage.vue";
+import FavoritePage from "@/views/FavoritePage.vue";
+import CartPage from "@/views/CartPage.vue";
+import DemoPage from "@/views/DemoPage.vue";
 
 const routes = [
   {
     path: "/",
-    name: "home",
-    component: HomePage,
+    name: "resume",
+    component: ResumePage,
   },
   {
-    path: "/list",
-    name: "list",
-    component: ProductList,
+    path: "/demo",
+    name: "demo",
+    component: DemoPage,
   },
   {
-    path: "/user",
-    name: "user",
-    component: UserRegister,
-  },
-  {
-    path: "/page",
-    name: "page",
-    component: ProductFavorites,
-  },
-  {
-    path: "/details/:id",
-    name: "details",
-    component: ProductDetails,
+    path: "/catalog",
+    name: "catalog",
+    component: CatalogPage,
   },
   {
     path: "/login",
     name: "login",
     component: UserLogin,
+  },
+  {
+    path: "/register",
+    name: "register",
+    component: UserRegister,
+  },
+  {
+    path: "/details/:id",
+    name: "details",
+    component: DetailsPage,
+  },
+  {
+    path: "/profile",
+    name: "profile",
+    component: ProfilePage,
+  },
+  {
+    path: "/favorite",
+    name: "favorite",
+    component: FavoritePage,
+  },
+  {
+    path: "/cart",
+    name: "cart",
+    component: CartPage,
   },
 ];
 

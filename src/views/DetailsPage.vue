@@ -2,21 +2,34 @@
   <div>
     <Header :title="'ОПИСАНИЕ ТОВАРА'" />
     <div>
-      <Navbar />
+      <NavbarMenu />
     </div>
 
     <div v-if="clothPartDetails" class="product-list">
       <div class="product-item">
         <div class="product-details">
-          <div>
-            <img
-              v-if="clothPartDetails.image"
-              :src="require(`../assets/img/${clothPartDetails.image[0]}.jpg`)"
-              :alt="clothPartDetails.text"
-              class="product-image"
-            />
+          <!-- Slider -->
+          <div class="slider-container">
+            <div class="slider">
+              <div
+                v-for="(image, index) in clothPartDetails.image"
+                :key="index"
+                :class="{ active: index === currentImageIndex }"
+              >
+                <img
+                  :src="require(`../assets/img/${image}.jpg`)"
+                  :alt="clothPartDetails.text"
+                  class="product-image"
+                />
+              </div>
+            </div>
+            <!-- Навигация (стрелки) -->
+            <div class="slider-nav">
+              <div class="arrow" @click="prevImage">&lt;</div>
+              <div class="arrow" @click="nextImage">&gt;</div>
+            </div>
           </div>
-
+          <!-- Info -->
           <div class="product-info">
             <div class="product-name">
               {{ clothPartDetails.text }}
@@ -39,14 +52,14 @@
               Размер: <span>{{ clothPartDetails.size }}</span>
             </div>
             <div>
-              Пол: <span> {{ clothPartDetails.old ? "Женский" : "Мужской" }}</span>
+              Пол:
+              <span> {{ clothPartDetails.old ? "Женский" : "Мужской" }}</span>
             </div>
             <div>
-               <span>{{ clothPartDetails.description }}</span>
+              <span>{{ clothPartDetails.description }}</span>
             </div>
             <div class="button">
-
-            <ButtonAdd :item="clothPartDetails" :size="true"/>
+              <ButtonAdd :item="clothPartDetails" :size="true" />
             </div>
           </div>
         </div>
@@ -56,7 +69,7 @@
 </template>
 
 <script setup>
-import Navbar from "@/components/Navbar.vue";
+import NavbarMenu from "@/components/NavbarMenu.vue";
 import Header from "../components/Header.vue";
 import ButtonAdd from "../components/ButtonAdd.vue";
 import { onMounted, ref } from "vue";
@@ -66,6 +79,15 @@ import { useRoute } from "vue-router";
 const store = useStore();
 const clothPartDetails = ref(null);
 const route = useRoute();
+const currentImageIndex = ref(0);
+
+const nextImage = () => {
+  currentImageIndex.value = (currentImageIndex.value + 1) % clothPartDetails.image.length;
+};
+
+const prevImage = () => {
+  currentImageIndex.value = (currentImageIndex.value - 1 + clothPartDetails.image.length) % clothPartDetails.image.length;
+};
 
 onMounted(async () => {
   const clothPartId = route.params.id;
@@ -87,6 +109,7 @@ onMounted(async () => {
 
 <style lang="sass" scoped>
 @import '../assets/styles/main'
+  
 .product-details
   width: 1200px
   margin: 50px auto
@@ -110,15 +133,13 @@ onMounted(async () => {
   font-size: 25px
   line-height: 1.6
 
-
 .product-name
   font-weight: bold
   margin-bottom: 20px
 
-.button 
+.button
   margin-top: 50px
   max-width: 200px
-  
 
 span
   margin-left: 10px
