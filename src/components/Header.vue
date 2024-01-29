@@ -1,50 +1,64 @@
 <template>
-  <div>
-    <div>
-      <header class="header-container">
-        <div>
-          <img class="img-header" src="../assets/img/header.jpg" alt="Drink" />
+  <header class="header-container">
+    <div class="container">
+      <div class="row align-items-center">
+        <div class="col-md-6">
+          <img class="img-fluid" src="@/assets/img/usa.png" alt="Изображение" />
         </div>
-
-        <div class="name-header">{{ title }}</div>
-      </header>
+        <div class="col-md-6">
+          <div class="name-header-container">
+            <h1 class="name-header">Магический Мир Ваших Желаний</h1>
+            <p class="subtitle">{{ title }}</p>
+          </div>
+        </div>
+      </div>
     </div>
-  </div>
+  </header>
 </template>
 
 <script setup>
-const props = defineProps({
-  title: {
-    type: String,
-  },
-});
+
+const props = defineProps(["title"]);
 </script>
 
-<style lang="sass" scoped>
-@import '../assets/styles/main'
-.header-container
-  position: relative
-  text-align: center
+<style scoped>
+.header-container {
+  background-color: #6ea4ca;
+  padding: 20px 0;
+}
 
-.img-header
-  width: 100%
-  height: 300px
+.img-fluid {
+  width: 150px;
+}
 
-.name-header
-  position: absolute
-  top: 50%
-  left: 50%
-  transform: translate(-50%, -50%)
-  color: #fff
-  font-size: 54px
-  text-align: center
-  letter-spacing: 2px
-  font-weight: bold
+.name-header-container {
+  overflow: hidden;
+}
 
-@media screen and (max-width: 768px)
-  .img-header
-    height: 200px
+.name-header {
+  font-size: 32px;
+  font-weight: bold;
+  margin-top: 20px;
+  color: #fff;
+}
 
-  .name-header
-    font-size: 36px
+.subtitle {
+  font-size: 21px;
+  margin-top: 10px;
+  color: #fff;
+}
+
+@media (max-width: 767px) {
+  .img-fluid {
+    width: 100px;
+  }
+
+  .name-header {
+    font-size: 21px;
+  }
+
+  .subtitle {
+    font-size: 17px;
+  }
+}
 </style>

@@ -1,39 +1,71 @@
 <template>
   <div>
-    <Header :title="'ОПИСАНИЕ ТОВАРА'" />
-    <div>
-      <NavbarMenu />
-    </div>
+    <Header :title="`Зачем тратить время? Закажи онлайн!`"/>
+    <NavbarMenu />
 
     <div v-if="clothPartDetails" class="product-list">
-      <div class="product-item">
-        <div class="product-details">
-          <!-- Slider -->
-          <div class="slider-container">
-            <div class="slider">
-              <div
-                v-for="(image, index) in clothPartDetails.image"
-                :key="index"
-                :class="{ active: index === currentImageIndex }"
-              >
+      <div class="container">
+
+      <div class="row">
+        <!-- Slider -->
+        <div class="col-md-6">
+          <div
+            id="carouselExampleControlsNoTouching"
+            class="carousel slide"
+            data-bs-touch="false"
+            data-bs-interval="false"
+          >
+            <div class="carousel-inner">
+              <div class="carousel-item active">
                 <img
-                  :src="require(`../assets/img/${image}.jpg`)"
-                  :alt="clothPartDetails.text"
-                  class="product-image"
+                  :src="require(`../assets/img/${clothPartDetails.image[0]}.jpg`)"
+                  class="d-block"
+                  style="width: 100%; max-height: 800px; margin: 20px; border-radius: 3%"
+                  alt="..."
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  :src="require(`../assets/img/${clothPartDetails.image[1]}.jpg`)"
+                  class="d-block"
+                  style="width: 100%; max-height: 800px; margin: 20px; border-radius: 3%"
+                  alt="..."
+                />
+              </div>
+              <div class="carousel-item">
+                <img
+                  :src="require(`../assets/img/${clothPartDetails.image[2]}.jpg`)"
+                  class="d-block"
+                  style="width: 100%;max-height: 800px; margin: 20px; border-radius: 3%"
+                  alt="..."
                 />
               </div>
             </div>
-            <!-- Навигация (стрелки) -->
-            <div class="slider-nav">
-              <div class="arrow" @click="prevImage">&lt;</div>
-              <div class="arrow" @click="nextImage">&gt;</div>
-            </div>
+            <button
+              class="carousel-control-prev"
+              type="button"
+              data-bs-target="#carouselExampleControlsNoTouching"
+              data-bs-slide="prev"
+            >
+              <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Previous</span>
+            </button>
+            <button
+              class="carousel-control-next"
+              type="button"
+              data-bs-target="#carouselExampleControlsNoTouching"
+              data-bs-slide="next"
+            >
+              <span class="carousel-control-next-icon" aria-hidden="true"></span>
+              <span class="visually-hidden">Next</span>
+            </button>
           </div>
-          <!-- Info -->
+        </div>
+        
+        <!-- Info -->
+        <div class="col-md-6">
           <div class="product-info">
-            <div class="product-name">
-              {{ clothPartDetails.text }}
-            </div>
+            <div class="product-name">{{ clothPartDetails.text }}</div>
 
             <div class="product-price" v-if="clothPartDetails.price">
               Цена: <span>{{ clothPartDetails.price }}</span> грн.
@@ -41,7 +73,7 @@
 
             <div class="product-availability">
               Наличие в магазине:
-              <span> {{ clothPartDetails.in_shop ? "Да" : "Нет" }}</span>
+              <span>{{ clothPartDetails.in_shop ? "Да" : "Нет" }}</span>
             </div>
 
             <div>
@@ -53,7 +85,7 @@
             </div>
             <div>
               Пол:
-              <span> {{ clothPartDetails.old ? "Женский" : "Мужской" }}</span>
+              <span>{{ clothPartDetails.old ? "Женский" : "Мужской" }}</span>
             </div>
             <div>
               <span>{{ clothPartDetails.description }}</span>
@@ -64,30 +96,26 @@
           </div>
         </div>
       </div>
+      </div>
     </div>
+
+    <Footer/>
   </div>
 </template>
 
 <script setup>
 import NavbarMenu from "@/components/NavbarMenu.vue";
 import Header from "../components/Header.vue";
+import Footer from '../components/Footer.vue'
 import ButtonAdd from "../components/ButtonAdd.vue";
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";
 
 const store = useStore();
-const clothPartDetails = ref(null);
 const route = useRoute();
-const currentImageIndex = ref(0);
 
-const nextImage = () => {
-  currentImageIndex.value = (currentImageIndex.value + 1) % clothPartDetails.image.length;
-};
-
-const prevImage = () => {
-  currentImageIndex.value = (currentImageIndex.value - 1 + clothPartDetails.image.length) % clothPartDetails.image.length;
-};
+const clothPartDetails = ref(null);
 
 onMounted(async () => {
   const clothPartId = route.params.id;
@@ -109,7 +137,7 @@ onMounted(async () => {
 
 <style lang="sass" scoped>
 @import '../assets/styles/main'
-  
+
 .product-details
   width: 1200px
   margin: 50px auto
