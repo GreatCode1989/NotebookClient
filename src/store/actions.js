@@ -2,7 +2,7 @@ import axios from "axios";
 
 export async function loginUser(username, password) {
   try {
-    const response = await axios.post("http://localhost:3000/user/login", {
+    const response = await axios.post("http://localhost:3000/auth/login", {
       ...username,
       ...password,
     });
@@ -18,11 +18,14 @@ export async function loginUser(username, password) {
 }
 export async function registerUser(username, password, email) {
   try {
-    const response = await axios.post("http://localhost:3000/user/register", {
-      ...username,
-      ...password,
-      ...email,
-    });
+    const response = await axios.post(
+      "http://localhost:3000/auth/registration",
+      {
+        ...username,
+        ...password,
+        ...email,
+      }
+    );
 
     if (response.status === 201) {
       return {
@@ -31,16 +34,33 @@ export async function registerUser(username, password, email) {
         data: response.data,
       };
     } else {
-      return { success: false, message: "Неудачная попытка регистрации" };
+      return {
+        success: false,
+        message: "Неудачная попытка регистрации",
+        error: response.data,
+      };
     }
   } catch (error) {
-    return { success: false, message: "Ошибка при регистрации", error: error };
+    if (error.response) {
+      
+      return {
+        success: false,
+        message: error.response.data.warningMessage,
+        error: error.response.data,
+      }; 
+    } else {
+      
+      return {
+        success: false,
+        message: "Ошибка при регистрации",
+        error: error,
+      };
+    }
   }
 }
 export async function getAllCloth({ commit }) {
   return await axios
-    .get("http://localhost:3000/cloth/allcloth", {
-    })
+    .get("http://localhost:3000/cloth/allcloth", {})
     .then((response) => {
       const data = response.data;
       commit("getAllRandom", data);
@@ -53,9 +73,7 @@ export async function getAllCloth({ commit }) {
 }
 export async function fetchClothPartDetails({ commit }, id) {
   try {
-    const response = await axios.get(
-      `http://localhost:3000/cloth/${id}`
-    );
+    const response = await axios.get(`http://localhost:3000/cloth/${id}`);
 
     if (response.status === 200) {
       commit("setClothPartDetails", response.data);
@@ -76,7 +94,6 @@ export async function fetchClothPartDetails({ commit }, id) {
   }
 }
 export async function selectCloth({ commit }, value) {
-
   let url = `http://localhost:3000/cloth/${value}`;
 
   return await axios
@@ -92,5 +109,42 @@ export async function selectCloth({ commit }, value) {
       throw error;
     });
 }
+export async function searchCloth({ commit }, search) {
+  try {
+    const response = await axios.post("http://localhost:3000/cloth/search", {
+      ...search,
+    });
+console.log(search)
+      const data = response.data
+      commit("searchItem", data);
+      return data 
+  
+  } catch (error) {
+    return { success: false, message: "Ошибка сервера", error: error };
+  }
+}
 
 
+
+export async function refreshTokens(refreshToken) {
+  try {
+    const response = await axios.post("http://localhost:3000/auth/refresh", {
+      ...refreshToken,
+    });
+
+    if (response.status === 200) {
+      const { access_token, refresh_token } = response.data;
+
+      localStorage.setItem("accessToken", access_token);
+      localStorage.setItem("refreshToken", refresh_token);
+
+      return access_token;
+    } else {
+     console.log('Не получилось обновить токен')
+      return null;
+    }
+  } catch (error) {
+    console.log('Не получилось обновить токен')
+     return null;
+  }
+}

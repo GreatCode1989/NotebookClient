@@ -2,4 +2,8 @@
   <router-view></router-view>
 </template>
 
-<style></style>
+<style>
+body {
+    font-family: 'Open Sans', sans-serif;
+  }
+</style>

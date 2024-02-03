@@ -2,123 +2,92 @@
   <div>
     <Header :title="'ЛУЧШИЕ БРЕНДЫ'" />
     <div>
-      <NavbarMenu @searchName="searchName($event)"/>
+      <NavbarMenu @searchItem="searchItem($event)" />
     </div>
-    <div>
-      <!-- Select -->
+    <div class="container mt-4">
+      <!-- Selects -->
+      <div class="row">
+        <div class="col-md-4 mb-3">
+          <label for="priceSort" class="form-label">Сортировка по цене</label>
+          <select v-model="priceSort" class="form-select" id="priceSort" @change="filterByPrice">
+            <option value="rel">По релевантности</option>
+            <option value="asc">По возрастанию цены</option>
+            <option value="desc">По убыванию цены</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="genderFilter" class="form-label">Фильтр по полу</label>
+          <select v-model="genderFilter" class="form-select" id="genderFilter">
+            <option value="male">Мужской</option>
+            <option value="female">Женский</option>
+          </select>
+        </div>
+        <div class="col-md-4 mb-3">
+          <label for="sizeFilter" class="form-label">Фильтр по размеру</label>
+          <select v-model="sizeFilter" class="form-select" id="sizeFilter">
+            <option value="s">S</option>
+            <option value="m">M</option>
+            <option value="l">L</option>
+          </select>
+        </div>
+      </div>
+    
       <div>
-        <Select @selectItem="selectItem($event)" />
-        <div class="filter-price">
-          <div>
-            <label class="label-filter" for="sortUp"
-              >Сортировать по возрастанию цены:</label
-            >
-            <input
-              class="input-filter"
-              type="checkbox"
-              id="sortUp"
-              v-model="sortUp"
-              @change="handleCheckboxChange"
-            />
-          </div>
-          <div>
-            <label class="label-filter" for="sortDown"
-              >Сортировать по убыванию цены:</label
-            >
-            <input
-              class="input-filter"
-              type="checkbox"
-              id="sortDown"
-              v-model="sortDown"
-              @change="handleCheckboxChange"
-            />
-          </div>
-          <div>
-            <button class="button-filter" @click="filterByPrice">
-              Применить фильтр
-            </button>
-          </div>
-          <div>
-            <button class="button-reset" @click="resetFilterPrice">
-              Сбросить фильтр
-            </button>
-          </div>
-        </div>
-      </div>
-    </div>
-    <!-- Main -->
-    <div>
-      <div v-if="items && items" class="product-list">
-        <div v-for="item in items" :key="item._id" class="product-item">
-          <router-link :to="{ name: 'details', params: { id: item._id } }">
-            <img
-              :src="require(`../assets/img/${item.image[0]}.jpg`)"
-              :alt="item.name"
-              class="product-image"
-            />
-          </router-link>
-          <div class="product-details">
-            <div class="product-name">{{ item.text }}</div>
-            <div class="product-price">Цена: {{ item.price }} грн.</div>
-            <div class="product-availability">
-              Наличие: {{ item.in_shop ? "Да" : "Нет" }}
+        <div v-if="items && items" class="row row-cols-1 row-cols-md-3 g-4">
+          <div v-for="item in items" :key="item._id" class="col">
+            <div class="card h-100">
+              <router-link :to="{ name: 'details', params: { id: item._id } }">
+                <img
+                  :src="require(`../assets/img/${item.image[0]}.jpg`)"
+                  :alt="item.name"
+                  class="card-img-top"
+                />
+              </router-link>
+              <div class="card-body">
+                <h5 class="card-title">{{ item.text }}</h5>
+                <p class="card-text">Цена: {{ item.price }} грн.</p>
+                <p class="card-text">
+                  Наличие: {{ item.in_shop ? "Да" : "Нет" }}
+                </p>
+                <!-- <ButtonAddToCart :item="item" />
+                <ButtonAddToFavorites :item="item" /> -->
+              </div>
             </div>
-            <ButtonAdd :item="item" />
           </div>
         </div>
+        <div v-else>Загрузка данных...</div>
       </div>
-      <div v-else>Загрузка данных...</div>
     </div>
   </div>
+    <Footer position="none"/>
 </template>
 
 <script setup>
-import NavbarMenu from "@/components/NavbarMenu.vue";
 import { ref } from "vue";
+import Footer from "@/components/Footer.vue";
+import NavbarMenu from "@/components/NavbarMenu.vue";
 import Header from "../components/Header.vue";
-import ButtonAdd from "../components/ButtonAdd.vue";
-import Select from "../components/Select.vue";
+
 
 const items = ref();
-const selectedCollection = ref();
-const sortDown = ref(false);
-const sortUp = ref(false);
-
-const handleCheckboxChange = () => {
-  if (sortUp.value && sortDown.value) {
-    if (event.target.id === "sortUp") {
-      sortDown.value = false;
-    } else if (event.target.id === "sortDown") {
-      sortUp.value = false;
-    }
-  }
-};
+const priceSort = ref("rel");
+const genderFilter = ref("male");
+const sizeFilter = ref("s");
 
 const filterByPrice = () => {
-  if (sortUp.value) {
-    sortDown.value = false;
-    items.value.sort((a, b) => a.price - b.price);
-  } else if (sortDown.value) {
-    sortUp.value = false;
-    items.value.sort((a, b) => b.price - a.price);
+  if(priceSort.value === 'rel') {
+    items.value = [...items.value].sort(() => Math.random() - 0.5);
   }
+  items.value.sort((a, b) =>
+    priceSort.value === "asc" ? a.price - b.price : b.price - a.price
+  );
 };
 
-const resetFilterPrice = () => {
-  sortUp.value = false;
-  sortDown.value = false;
-  items.value = [...items.value].sort(() => Math.random() - 0.5);
-};
-
-const searchName = (event) => {
-  items.value = event;
-} 
-
-const selectItem = (event) => {
-  selectedCollection.value = event;
+const searchItem = (event) => {
   items.value = event;
 };
 </script>
+
 
 <style lang="sass" scoped>
 @import '../assets/styles/main'

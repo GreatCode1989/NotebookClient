@@ -1,6 +1,8 @@
 <template>
-  <nav class="navbar navbar-expand-lg navbar-light"
-  style="background-color: #e3f2fd">
+  <nav
+    class="navbar navbar-expand-lg navbar-light"
+    style="background-color: #e3f2fd"
+  >
     <div class="container-xl">
       <router-link
         class="nav-link p-0 fw-bold"
@@ -31,7 +33,7 @@
               >Каталог товаров</router-link
             >
           </li>
-          <li v-if="!loggedIn" class="nav-item">
+          <li v-if="!loggedIn" class="nav-item me-5">
             <router-link class="nav-link" :to="{ name: 'register' }"
               >Регистрация/Вход</router-link
             >
@@ -44,7 +46,9 @@
               data-bs-toggle="dropdown"
               aria-expanded="false"
             >
-              Профиль
+              {{
+                username.length > 10 ? `${username.slice(0, 10)}...` : username
+              }}
             </a>
             <ul class="dropdown-menu">
               <li>
@@ -67,12 +71,11 @@
             </ul>
           </li>
         </ul>
-        <form class="d-flex">
+        <form class="d-flex" @submit.prevent="searchCloth">
           <input
             class="form-control me-2"
             type="search"
             v-model="searchItem"
-            @change="searchCloth"
             placeholder="Поиск"
             aria-label="Search"
           />
@@ -84,7 +87,7 @@
 </template>
 
 <script setup>
-import { ref, defineEmits } from "vue";
+import { ref, defineEmits, onMounted } from "vue";
 import { useStore } from "vuex";
 
 const store = useStore();
@@ -92,8 +95,17 @@ const emit = defineEmits();
 
 const searchItem = ref("");
 const items = ref();
+const username = ref("");
+const loggedIn = ref(true);
 
-const loggedIn = true;
+const logged = () => {
+  const user = localStorage.getItem("username");
+
+  if (user && user.length > 0) {
+    username.value = user;
+    loggedIn.value = true;
+  } else loggedIn.value = false;
+};
 
 function searchCloth() {
   if (searchItem.value.length > 0) {
@@ -103,15 +115,37 @@ function searchCloth() {
       })
       .then((data) => {
         items.value = data;
-        isSearchPerformed.value = true;
-        emit("searchName", items.value);
-        console.log("Данные успешно получены:", data);
+        
+        emit("searchItem", items.value);
       })
       .catch((error) => {
         console.error("Ошибка при получении данных:", error);
       });
   }
 }
+
+const clothRandom = () => {
+  store
+    .dispatch("getAllCloth")
+    .then((data) => {
+      items.value = data;
+      emit("searchItem", items.value);
+      console.log("Данные успешно получены:", data);
+    })
+    .catch((error) => {
+      console.error("Ошибка при получении данных:", error);
+    });
+};
+
+
+onMounted(() => {
+  logged()
+  if (searchItem.value !== "") {
+    searchCloth();
+  } else {
+    clothRandom()
+  }
+});
 </script>
 
 <style scoped>
