@@ -91,7 +91,7 @@
               <span>{{ clothPartDetails.description }}</span>
             </div>
             <div class="button">
-              <ButtonAdd :item="clothPartDetails" :size="true" />
+              <ButtonAddToCart :item="clothPartDetails" :size="true" />
             </div>
           </div>
         </div>
@@ -107,7 +107,7 @@
 import NavbarMenu from "@/components/NavbarMenu.vue";
 import Header from "../components/Header.vue";
 import Footer from '../components/Footer.vue'
-import ButtonAdd from "../components/ButtonAdd.vue";
+import ButtonAddToCart from "../components/ButtonAddToCart.vue";
 import { onMounted, ref } from "vue";
 import { useStore } from "vuex";
 import { useRoute } from "vue-router";

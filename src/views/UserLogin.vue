@@ -129,17 +129,22 @@ function loginUser() {
     })
     .then((result) => {
       if (result.success) {
-        const { access_token, refresh_token, username } = result.data;
-        localStorage.setItem("accessToken", access_token);
-        localStorage.setItem("refreshToken", refresh_token);
-        localStorage.setItem("username", username);
+        const { access_token, refresh_token, username, id } = result.data;
+
+        const tokenData = {
+          access_token,
+          refresh_token,
+          username,
+          id,
+        };
+
+        localStorage.setItem("tokenData", JSON.stringify(tokenData));
 
         successMessage.value = "Успешный вход!";
         clearForm();
         router.push({ name: "catalog" });
       } else {
-        errorMessage.value =
-          result.data.errorMessage || "Неверный логин или пароль!";
+        errorMessage.value = "Неверный логин или пароль!";
       }
     })
     .catch((error) => {

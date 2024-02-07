@@ -42,14 +42,12 @@ export async function registerUser(username, password, email) {
     }
   } catch (error) {
     if (error.response) {
-      
       return {
         success: false,
         message: error.response.data.warningMessage,
         error: error.response.data,
-      }; 
+      };
     } else {
-      
       return {
         success: false,
         message: "Ошибка при регистрации",
@@ -114,18 +112,14 @@ export async function searchCloth({ commit }, search) {
     const response = await axios.post("http://localhost:3000/cloth/search", {
       ...search,
     });
-console.log(search)
-      const data = response.data
-      commit("searchItem", data);
-      return data 
-  
+    console.log(search);
+    const data = response.data;
+    commit("searchItem", data);
+    return data;
   } catch (error) {
     return { success: false, message: "Ошибка сервера", error: error };
   }
 }
-
-
-
 export async function refreshTokens(refreshToken) {
   try {
     const response = await axios.post("http://localhost:3000/auth/refresh", {
@@ -140,11 +134,53 @@ export async function refreshTokens(refreshToken) {
 
       return access_token;
     } else {
-     console.log('Не получилось обновить токен')
+      console.log("Не получилось обновить токен");
       return null;
     }
   } catch (error) {
-    console.log('Не получилось обновить токен')
-     return null;
+    console.log("Не получилось обновить токен");
+    return null;
+  }
+}
+
+export async function addToCart( username, userId, partId) {
+  try {
+    const response = await axios.post("http://localhost:3000/cart/add", {
+      ...username,
+      ...userId,
+      ...partId
+    });
+
+    if (response.status === 201) {
+      const data = response.data;
+
+      return data;
+    } else {
+      console.log("Не получилось добавить в корзину");
+      return null;
+    }
+  } catch (error) {
+    console.log("Server error");
+    return null;
+  }
+}
+export async function checkPartId( userId, partId) {
+  try {
+    const response = await axios.post("http://localhost:3000/cart/check", {
+      ...userId,
+      ...partId
+    });
+
+    if (response.status === 201) {
+      const data = response.data;
+
+      return data;
+    } else {
+      console.log("Не получилось найти в корзину");
+      return false;
+    }
+  } catch (error) {
+    console.log("Server error");
+    return false;
   }
 }

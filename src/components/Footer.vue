@@ -1,11 +1,11 @@
 <template>
-    <div id="app">
-    <footer class="footer mt-auto py-4" style="background-color: #e6fde3">
+  <div id="app">
+    <footer class="footer mt-auto" style="background-color: #e6fde3">
       <div class="container">
         <div class="row">
           <div class="col-md-6">
             <span class="text-muted fs-10 mb-3"
-              >Designed and Written by Anatoliy Trizna &copy; 2024</span
+              >Designed and Written by Anatoliy Trizna &nbsp; &copy; 2024</span
             >
           </div>
           <div class="col-md-6 d-flex justify-content-center">
@@ -36,7 +36,6 @@
   </div>
 </template>
 
-
 <style scoped>
 img {
   width: 30px;
@@ -49,6 +48,7 @@ img:hover {
   display: flex;
   flex-direction: column;
   position: relative;
+  min-height: 70vh;
 }
 
 .footer {
@@ -56,7 +56,20 @@ img:hover {
   bottom: 0;
   width: 100%;
   background-color: #e6fde3;
-  padding: 15px;
+  padding: 20px;
   text-align: center;
+}
+
+@media (max-width: 800px) {
+  img {
+    width: 20px;
+  }
+  span {
+    font-size: 13px;
+  }
+
+  .footer {
+    padding: 12px;
+  }
 }
 </style>
