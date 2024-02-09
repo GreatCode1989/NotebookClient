@@ -1,9 +1,11 @@
 <template>
   <header class="header-container">
     <div class="container">
-      <div class="row align-items-center">
+      <div class="row align-items-center ">
         <div class="col-md-6">
-          <img class="img-fluid" src="@/assets/img/usa.png" alt="Изображение" />
+          <div >
+            <img class="img-fluid" src="@/assets/img/usa.png" alt="Изображение" />
+          </div>
         </div>
         <div class="col-md-6">
           <div class="name-header-container">
@@ -20,12 +22,15 @@
 
 const props = defineProps(["title"]);
 </script>
-
+ 
 <style scoped>
 .header-container {
   background-color: #6ea4ca;
   padding: 20px 0;
 }
+
+
+
 
 .img-fluid {
   width: 150px;
@@ -48,17 +53,52 @@ const props = defineProps(["title"]);
   color: #fff;
 }
 
-@media (max-width: 767px) {
+
+@media (max-width: 1400px) {
   .img-fluid {
-    width: 100px;
+    width: 110px;
   }
 
   .name-header {
-    font-size: 21px;
+    font-size: 24px;
   }
 
   .subtitle {
+    font-size: 20px;
+  }
+
+  .header-container {
+  padding: 15px 0px;
+}
+}
+
+
+@media (max-width: 990px) {
+  .img-fluid {
+    width: 80px;
+  }
+
+  .name-header {
     font-size: 17px;
   }
+
+  .subtitle {
+    font-size: 15px;
+    margin-bottom: 10px;
+  }
+
+  .header-container {
+  padding: 3px 0px;
+}
+}
+
+@media (max-width: 767px) {
+  .img-fluid {
+   display: none;
+  }
+
+  
+
+
 }
 </style>

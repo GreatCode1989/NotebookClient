@@ -98,15 +98,17 @@ const items = ref();
 const username = ref("");
 const loggedIn = ref(true);
 
+const storedToken = localStorage.getItem("tokenData");
+const tokenData = storedToken ? JSON.parse(storedToken) : null;
+
 const logged = () => {
-  const user = localStorage.getItem("username");
-
-  if (user && user.length > 0) {
-    username.value = user;
+  if (tokenData && tokenData.username && tokenData.username.length > 0) {
+    username.value = tokenData.username;
     loggedIn.value = true;
-  } else loggedIn.value = false;
+  } else {
+    loggedIn.value = false;
+  }
 };
-
 function searchCloth() {
   if (searchItem.value.length > 0) {
     store
@@ -115,7 +117,7 @@ function searchCloth() {
       })
       .then((data) => {
         items.value = data;
-        
+
         emit("searchItem", items.value);
       })
       .catch((error) => {
@@ -137,13 +139,12 @@ const clothRandom = () => {
     });
 };
 
-
 onMounted(() => {
-  logged()
+  logged();
   if (searchItem.value !== "") {
     searchCloth();
   } else {
-    clothRandom()
+    clothRandom();
   }
 });
 </script>

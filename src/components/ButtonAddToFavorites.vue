@@ -3,16 +3,18 @@
     <button
       :class="{
         btn: true,
-        'btn-primary': !isPartIdAdded,
-        'btn-success': isPartIdAdded,
+        'btn-none': !isPartIdAdded,
+        'btn-none': isPartIdAdded,
       }"
       @click="handleButtonClick"
     >
-      <img v-if="!isPartIdAdded" src="@/assets/icons/cart.png" alt="heart-icon" class="icon" />
-      {{ isPartIdAdded ? " В корзине" : "Купить" }}
+      <img v-if="!isPartIdAdded" src="@/assets/icons/fav1.png" alt="favorite-icon" class="icon" />
+      <img v-else src="@/assets/icons/fav2.png" alt="favorite-icon" class="icon" />
+      
     </button>
   </div>
 </template>
+
 
 <script setup>
 import { useRouter } from "vue-router";
@@ -23,6 +25,10 @@ const router = useRouter();
 const store = useStore();
 
 const props = defineProps({
+  size: {
+    type: Boolean,
+    default: false,
+  },
   item: {
     type: Object,
     required: true,
@@ -96,7 +102,7 @@ const addToCart = () => {
 
 <style scoped>
 img {
-  width: 20px;
+  width: 25px;
   margin-right: 7px;
   margin-bottom: 5px;
 }

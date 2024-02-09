@@ -30,7 +30,7 @@
 <script setup>
 import NavbarMenu from "@/components/NavbarMenu.vue";
 import Header from "../components/Header.vue";
-import ButtonRemove from "@/components/ButtonRemove.vue";
+import ButtonRemove from "@/components/ButtonAddToFavorites.vue";
 import { ref } from "vue";
 import { useStore } from "vuex";
 

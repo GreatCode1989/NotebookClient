@@ -35,7 +35,12 @@
         </div>
         <div class="col-md-4 mb-3">
           <label for="sizeFilter" class="form-label">Фильтр по размеру</label>
-          <select v-model="sizeFilter"  @change="filterBySize" class="form-select" id="sizeFilter">
+          <select
+            v-model="sizeFilter"
+            @change="filterBySize"
+            class="form-select"
+            id="sizeFilter"
+          >
             <option value="all">Все</option>
             <option value="30">30</option>
             <option value="31">31</option>
@@ -63,8 +68,10 @@
                 <p class="card-text">
                   Наличие: {{ item.in_shop ? "Да" : "Нет" }}
                 </p>
-                <ButtonAddToCart :item="item" />
-                <!-- <ButtonAddToFavorites :item="item" /> -->
+                <div class="card-buttons">
+                  <ButtonAddToCart :item="item" />
+                  <ButtonAddToFavorites :item="item" />
+                </div>
               </div>
             </div>
           </div>
@@ -84,10 +91,11 @@
 </template>
 
 <script setup>
-import { ref, watchEffect, onMounted } from "vue";
+import { ref, onMounted } from "vue";
 import Footer from "@/components/Footer.vue";
 import NavbarMenu from "@/components/NavbarMenu.vue";
 import ButtonAddToCart from "@/components/ButtonAddToCart.vue";
+import ButtonAddToFavorites from "@/components/ButtonAddToFavorites.vue";
 import Header from "../components/Header.vue";
 
 const items = ref([]);
@@ -102,7 +110,7 @@ const searchItem = (event) => {
 
 const filterByPriceAndGender = () => {
   let filteredItems = [...originalItems.value];
-  console.log(filteredItems)
+  console.log(filteredItems);
 
   if (priceSort.value === "rel") {
     filteredItems = filteredItems.sort(() => Math.random() - 0.5);
@@ -113,8 +121,8 @@ const filterByPriceAndGender = () => {
   }
 
   if (genderFilter.value !== "all") {
-    filteredItems = filteredItems.filter(
-      (item) => (genderFilter.value === "female" ? item.old : !item.old)
+    filteredItems = filteredItems.filter((item) =>
+      genderFilter.value === "female" ? item.old : !item.old
     );
   }
 
@@ -123,7 +131,9 @@ const filterByPriceAndGender = () => {
 
 const filterBySize = () => {
   if (sizeFilter.value !== "all") {
-    items.value = originalItems.value.filter((item) => item.size == sizeFilter.value);
+    items.value = originalItems.value.filter(
+      (item) => item.size == sizeFilter.value
+    );
   } else {
     filterByPriceAndGender();
   }
@@ -137,5 +147,11 @@ onMounted(() => {
 <style scoped>
 .spinner {
   margin-top: 70px;
+}
+
+.card-buttons {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 10px;
 }
 </style>

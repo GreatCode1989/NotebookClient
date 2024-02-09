@@ -142,13 +142,12 @@ export async function refreshTokens(refreshToken) {
     return null;
   }
 }
-
-export async function addToCart( username, userId, partId) {
+export async function addToCart(username, userId, partId) {
   try {
     const response = await axios.post("http://localhost:3000/cart/add", {
       ...username,
       ...userId,
-      ...partId
+      ...partId,
     });
 
     if (response.status === 201) {
@@ -164,11 +163,11 @@ export async function addToCart( username, userId, partId) {
     return null;
   }
 }
-export async function checkPartId( userId, partId) {
+export async function checkPartId(userId, partId) {
   try {
     const response = await axios.post("http://localhost:3000/cart/check", {
       ...userId,
-      ...partId
+      ...partId,
     });
 
     if (response.status === 201) {
@@ -177,6 +176,25 @@ export async function checkPartId( userId, partId) {
       return data;
     } else {
       console.log("Не получилось найти в корзину");
+      return false;
+    }
+  } catch (error) {
+    console.log("Server error");
+    return false;
+  }
+}
+export async function removeFromCart(cartId) {
+  try {
+    const response = await axios.post("http://localhost:3000/cart/delete", {
+      ...cartId,
+    });
+    console.log(props.item._id);
+    if (response.status === 201) {
+      const data = response.data;
+
+      return data;
+    } else {
+      console.log("Не получилось удалить из корзины");
       return false;
     }
   } catch (error) {
