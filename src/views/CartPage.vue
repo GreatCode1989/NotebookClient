@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title="'Закажи прямо сейчас и получи бонус!'" />
+    <Header :cart-item="items"/>
     <NavbarMenu />
     <div class="container mt-4">
       <div class="table-responsive-xl">
@@ -90,7 +90,7 @@ import Footer from "@/components/Footer.vue";
 import NavbarMenu from "@/components/NavbarMenu.vue";
 import Header from "../components/Header.vue";
 
-const items = ref();
+const items = ref( );
 
 function incrementCount(item) {
   item.count++;

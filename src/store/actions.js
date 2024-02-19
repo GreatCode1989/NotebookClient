@@ -56,9 +56,9 @@ export async function registerUser(username, password, email) {
     }
   }
 }
-export async function getAllCloth({ commit }) {
+export async function getAllNotebooks({ commit }) {
   return await axios
-    .get("http://localhost:3000/cloth/allcloth", {})
+    .get("http://localhost:3000/notebook/all", {})
     .then((response) => {
       const data = response.data;
       commit("getAllRandom", data);
@@ -107,9 +107,9 @@ export async function selectCloth({ commit }, value) {
       throw error;
     });
 }
-export async function searchCloth({ commit }, search) {
+export async function searchNotebook({ commit }, search) {
   try {
-    const response = await axios.post("http://localhost:3000/cloth/search", {
+    const response = await axios.post("http://localhost:3000/notebook/search", {
       ...search,
     });
     console.log(search);
@@ -142,14 +142,19 @@ export async function refreshTokens(refreshToken) {
     return null;
   }
 }
-export async function addToCart(username, userId, partId) {
+export async function addToCart(username, userId, partId, headers) {
   try {
-    const response = await axios.post("http://localhost:3000/cart/add", {
-      ...username,
-      ...userId,
-      ...partId,
-    });
-
+    console.log("Before request:", { username, userId, partId, headers });
+    const response = await axios.post(
+      "http://localhost:3000/cart/add",
+      {
+        ...username,
+        ...userId,
+        ...partId,
+      },
+      { ...headers }
+    );
+    console.log("Headers:", headers);
     if (response.status === 201) {
       const data = response.data;
 
@@ -159,16 +164,20 @@ export async function addToCart(username, userId, partId) {
       return null;
     }
   } catch (error) {
-    console.log("Server error");
+    console.log("Server error", error);
     return null;
   }
 }
-export async function checkPartId(userId, partId) {
+export async function checkPartId(userId, partId, headers) {
   try {
-    const response = await axios.post("http://localhost:3000/cart/check", {
-      ...userId,
-      ...partId,
-    });
+    const response = await axios.post(
+      "http://localhost:3000/cart/check",
+      {
+        ...userId,
+        ...partId,
+      },
+      { ...headers }
+    );
 
     if (response.status === 201) {
       const data = response.data;
@@ -176,25 +185,6 @@ export async function checkPartId(userId, partId) {
       return data;
     } else {
       console.log("Не получилось найти в корзину");
-      return false;
-    }
-  } catch (error) {
-    console.log("Server error");
-    return false;
-  }
-}
-export async function removeFromCart(cartId) {
-  try {
-    const response = await axios.post("http://localhost:3000/cart/delete", {
-      ...cartId,
-    });
-    console.log(props.item._id);
-    if (response.status === 201) {
-      const data = response.data;
-
-      return data;
-    } else {
-      console.log("Не получилось удалить из корзины");
       return false;
     }
   } catch (error) {

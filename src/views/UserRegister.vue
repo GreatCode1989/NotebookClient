@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title="`Джинсовая ткань, которая делает вас`" />
+    <Header />
     <div>
       <NavbarMenu />
     </div>

@@ -1,75 +1,63 @@
 <template>
-  <div id="app">
-    <footer class="footer mt-auto" style="background-color: #e6fde3">
-      <div class="container">
-        <div class="row">
-          <div class="col-md-6">
-            <span class="text-muted fs-10 mb-3"
-              >Designed and Written by Anatoliy Trizna &nbsp; &copy; 2024</span
-            >
-          </div>
-          <div class="col-md-6 d-flex justify-content-center">
-            <a
-              href="https://www.instagram.com/anatoliysavior/"
-              class="me-2"
-              target="_blank"
-            >
-              <img src="../assets/img/instagram.jpeg" alt="instagram" />
-            </a>
-            <a
-              href="https://www.linkedin.com/in/anatoliy-trizna-451340287/"
-              class="me-2"
-              target="_blank"
-            >
-              <img src="../assets/img/linkedin.png" alt="linkedin" />
-            </a>
-            <a href="tel:+123456789" class="me-2" target="_blank">
-              <img src="../assets/img/facebook.png" alt="facebook" />
-            </a>
-            <a href="https://t.me/night_coder_one" class="me-2" target="_blank">
-              <img src="../assets/img/telegram.png" alt="telegram" />
-            </a>
-          </div>
-        </div>
-      </div>
-    </footer>
-  </div>
+  <footer class="footer" id="footer">
+			<div class="container">
+				<div class="row">
+					<div class="col-md-3 col-6">
+						<h4>Information</h4>
+						<ul class="list-unstyled">
+							<li><a href="index.html">Home</a></li>
+							<li><a href="#">Payment</a></li>
+							<li><a href="#">Delivery</a></li>
+							<li><a href="#">Contacts</a></li>
+						</ul>
+					</div>
+
+					<div class="col-md-3 col-6">
+						<h4>Working hours</h4>
+						<ul class="list-unstyled">
+							<li>Paris, str. Bretan</li>
+							<li>mon-fri: 9:00 - 18:00</li>
+						</ul>
+					</div>
+
+					<div class="col-md-3 col-6">
+						<h4>Contacts</h4>
+						<ul class="list-unstyled">
+							<li><a href="tel:+380962226347">096-222-63-47</a></li>
+										</ul>
+					</div>
+
+					<div class="col-md-3 col-6">
+						<h4>Follow us</h4>
+						<ul class="footer-icons">
+							<li>
+                <a
+                  href="https://www.linkedin.com/in/anatoliy-trizna-451340287/"
+                  target="_blank"
+                >
+                  <i class="fa-brands fa-linkedin"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.facebook.com/AnatoliySavior"
+                  target="_blank"
+                >
+                  <i class="fa-brands fa-facebook-f"></i>
+                </a>
+              </li>
+              <li>
+                <a
+                  href="https://www.instagram.com/anatoliysavior/"
+                  target="_blank"
+                >
+                  <i class="fa-brands fa-instagram"></i>
+                </a>
+              </li>
+						</ul>
+					</div>
+				</div>
+			</div>
+		</footer>
 </template>
 
-<style scoped>
-img {
-  width: 30px;
-}
-
-img:hover {
-  transform: scale(1.2);
-}
-#app {
-  display: flex;
-  flex-direction: column;
-  position: relative;
-  min-height: 70vh;
-}
-
-.footer {
-  position: sticky;
-  bottom: 0;
-  width: 100%;
-  background-color: #e6fde3;
-  padding: 20px;
-  text-align: center;
-}
-
-@media (max-width: 800px) {
-  img {
-    width: 20px;
-  }
-  span {
-    font-size: 13px;
-  }
-
-  .footer {
-    padding: 12px;
-  }
-}
-</style>

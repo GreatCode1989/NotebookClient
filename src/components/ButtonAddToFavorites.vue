@@ -1,17 +1,10 @@
 <template>
-  <div class="product-buttons">
-    <button
-      :class="{
-        btn: true,
-        'btn-none': !isPartIdAdded,
-        'btn-none': isPartIdAdded,
-      }"
-      @click="handleButtonClick"
-    >
-      <img v-if="!isPartIdAdded" src="@/assets/icons/fav1.png" alt="favorite-icon" class="icon" />
-      <img v-else src="@/assets/icons/fav2.png" alt="favorite-icon" class="icon" />
-      
-    </button>
+<div
+    :class="{ 'btn-primary': !isPartIdAdded, 'btn-warning': isPartIdAdded}"
+    class="offer-heart ms-1"
+    :style="{ color: isPartIdAdded ? 'green' : 'white' }" 
+  >
+    <i @click="handleButtonClick" class="fas fa-heart heart-icon"></i>
   </div>
 </template>
 
@@ -38,7 +31,7 @@ const props = defineProps({
 const storedToken = localStorage.getItem("tokenData");
 const tokenData = storedToken ? JSON.parse(storedToken) : null;
 
-const isPartIdAdded = ref(false);
+const isPartIdAdded = ref(true);
 
 onMounted(() => {
   if (tokenData && props.item && props.item._id) {
@@ -101,9 +94,15 @@ const addToCart = () => {
 </script>
 
 <style scoped>
-img {
-  width: 25px;
-  margin-right: 7px;
-  margin-bottom: 5px;
+
+.heart-icon {
+  font-size: 25px; 
+  border-radius: 50%; 
+  padding-top: 9px;
+  cursor: pointer;
+}
+
+.heart-icon :hover {
+  background: white;
 }
 </style>

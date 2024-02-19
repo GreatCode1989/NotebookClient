@@ -1,6 +1,6 @@
 <template>
     <div>
-    <Header :title="'ЛУЧШИЕ БРЕНДЫ'" />
+    <Header />
     <div>
       <NavbarMenu />
     </div>

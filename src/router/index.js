@@ -12,7 +12,7 @@ import DemoPage from "@/views/DemoPage.vue";
 
 const routes = [
   {
-    path: "/",
+    path: "/resume",
     name: "resume",
     component: ResumePage,
   },
@@ -22,7 +22,7 @@ const routes = [
     component: DemoPage,
   },
   {
-    path: "/catalog",
+    path: "/",
     name: "catalog",
     component: CatalogPage,
   },

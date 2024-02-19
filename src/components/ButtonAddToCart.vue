@@ -1,17 +1,12 @@
 <template>
-  <div class="product-buttons">
-    <button
-      :class="{
-        btn: true,
-        'btn-primary': !isPartIdAdded,
-        'btn-success': isPartIdAdded,
-      }"
-      @click="handleButtonClick"
-    >
-      <img v-if="!isPartIdAdded" src="@/assets/icons/cart.png" alt="heart-icon" class="icon" />
-      {{ isPartIdAdded ? " В корзине" : "Купить" }}
-    </button>
+  <div
+  :style="{ color: isPartIdAdded ? 'green' : 'white' }" 
+  :class="{ 'btn-primary': !isPartIdAdded, 'btn-warning': isPartIdAdded}"
+    class="btn add-to-cart"
+  >
+    <i @click="handleButtonClick" class="fa-solid fa-shopping-cart"></i>
   </div>
+  
 </template>
 
 <script setup>
@@ -32,16 +27,21 @@ const props = defineProps({
 const storedToken = localStorage.getItem("tokenData");
 const tokenData = storedToken ? JSON.parse(storedToken) : null;
 
-const isPartIdAdded = ref(false);
+const isPartIdAdded = ref(true);
 
 onMounted(() => {
   if (tokenData && props.item && props.item._id) {
     const partId = props.item._id;
 
+    const headers = {
+      Authorization: `Bearer ${tokenData.access_token}`,
+    };
+
     store
       .dispatch("checkPartId", {
         partId,
         userId: tokenData.id,
+        headers,
       })
       .then((result) => {
         if (typeof result === "boolean") {
@@ -69,11 +69,16 @@ const handleButtonClick = () => {
 
 const addToCart = () => {
   if (tokenData && props.item && props.item._id) {
+    const headers = {
+      Authorization: `Bearer ${tokenData.access_token}`,
+    };
+
     store
       .dispatch("addToCart", {
         partId: props.item._id,
         username: tokenData.username,
         userId: tokenData.id,
+        headers: headers,
       })
       .then((result) => {
         if (result) {
@@ -93,11 +98,3 @@ const addToCart = () => {
   }
 };
 </script>
-
-<style scoped>
-img {
-  width: 20px;
-  margin-right: 7px;
-  margin-bottom: 5px;
-}
-</style>

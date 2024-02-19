@@ -1,6 +1,6 @@
 <template>
   <div>
-    <Header :title="'ИЗБРАННОЕ'" />
+    <Header />
     <div>
       <NavbarMenu />
     </div>

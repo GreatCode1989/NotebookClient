@@ -1,59 +1,23 @@
 <template>
   <div>
-    <Header :title="'ЛУЧШИЕ БРЕНДЫ'" />
+    <Header @search="searchValue($event)" />
     <div>
-      <NavbarMenu @searchItem="searchItem($event)" />
+  <NavbarMenu/>
     </div>
     <div class="container mt-4">
       <!-- Selects -->
       <div class="row">
-        <div class="col-md-4 mb-3">
-          <label for="priceSort" class="form-label">Сортировка по цене</label>
-          <select
-            v-model="priceSort"
-            class="form-select"
-            id="priceSort"
-            @change="filterByPriceAndGender"
-          >
-            <option value="rel">По релевантности</option>
-            <option value="asc">По возрастанию цены</option>
-            <option value="desc">По убыванию цены</option>
-          </select>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="genderFilter" class="form-label">Фильтр по полу</label>
-          <select
-            v-model="genderFilter"
-            @change="filterByPriceAndGender"
-            class="form-select"
-            id="genderFilter"
-          >
-            <option value="all">Все</option>
-            <option value="male">Мужской</option>
-            <option value="female">Женский</option>
-          </select>
-        </div>
-        <div class="col-md-4 mb-3">
-          <label for="sizeFilter" class="form-label">Фильтр по размеру</label>
-          <select
-            v-model="sizeFilter"
-            @change="filterBySize"
-            class="form-select"
-            id="sizeFilter"
-          >
-            <option value="all">Все</option>
-            <option value="30">30</option>
-            <option value="31">31</option>
-            <option value="32">32</option>
-            <option value="33">33</option>
-            <option value="34">34</option>
-          </select>
-        </div>
+        <FilterPrice @filter="handlePriceFilter" />
+        <FilterSize @filter="handleSizeFilter" />
+        <FilterGender @filter="handleGenderFilter" />
       </div>
 
       <div>
-        <div v-if="items && items" class="row row-cols-1 row-cols-md-3 g-4">
-          <div v-for="item in items" :key="item._id" class="col">
+        <div
+          v-if="items && filteredItems"
+          class="row row-cols-1 row-cols-md-3 g-4"
+        >
+          <div v-for="item in filteredItems" :key="item._id" class="col">
             <div class="card h-100">
               <router-link :to="{ name: 'details', params: { id: item._id } }">
                 <img
@@ -91,56 +55,95 @@
 </template>
 
 <script setup>
-import { ref, onMounted } from "vue";
-import Footer from "@/components/Footer.vue";
+import { ref, computed, onMounted, watch } from "vue";
+import { useStore } from "vuex";
+import Header from "../components/Header.vue";
 import NavbarMenu from "@/components/NavbarMenu.vue";
+import Footer from "@/components/Footer.vue";
 import ButtonAddToCart from "@/components/ButtonAddToCart.vue";
 import ButtonAddToFavorites from "@/components/ButtonAddToFavorites.vue";
-import Header from "../components/Header.vue";
+import FilterSize from "@/components/FilterSize.vue";
+import FilterGender from "@/components/FilterGender.vue";
+import FilterPrice from "@/components/FilterPrice.vue";
 
+const store = useStore();
 const items = ref([]);
-const originalItems = ref([]);
-const priceSort = ref("rel");
-const genderFilter = ref("all");
-const sizeFilter = ref("all");
+const priceFilter = ref("");
+const genderFilter = ref("");
+const sizeFilter = ref("");
+const searchItem = ref('')
 
-const searchItem = (event) => {
-  items.value = event;
+const filteredItems = computed(() => {
+  let itemsCopy = [...items.value];
+
+  itemsCopy =
+    priceFilter.value === "asc"
+      ? itemsCopy.sort((a, b) => parseFloat(a.price) - parseFloat(b.price))
+      : priceFilter.value === "desc"
+      ? itemsCopy.sort((a, b) => parseFloat(b.price) - parseFloat(a.price))
+      : itemsCopy;
+
+  itemsCopy = itemsCopy.filter((item) => {
+    return genderFilter.value === "female"
+      ? item.old
+      : genderFilter.value === "male"
+      ? !item.old
+      : true;
+  });
+  return itemsCopy;
+});
+
+const handleSizeFilter = (filter) => {
+  sizeFilter.value = filter;
+};
+const handleGenderFilter = (filter) => {
+  genderFilter.value = filter;
+};
+const handlePriceFilter = (filter) => {
+  priceFilter.value = filter;
+  console.log(priceFilter.value);
+};
+const searchValue = (event) => {
+  searchItem.value = event;
 };
 
-const filterByPriceAndGender = () => {
-  let filteredItems = [...originalItems.value];
-  console.log(filteredItems);
+function searchNotebook() {
+  if (searchItem.value.length > 0) {
+    store
+      .dispatch("searchNotebook", {
+        search: searchItem.value,
+      })
+      .then((data) => {
+        items.value = data;
 
-  if (priceSort.value === "rel") {
-    filteredItems = filteredItems.sort(() => Math.random() - 0.5);
-  } else {
-    filteredItems.sort((a, b) =>
-      priceSort.value === "asc" ? a.price - b.price : b.price - a.price
-    );
+      })
+      .catch((error) => {
+        console.error("Ошибка при получении данных:", error);
+      });
   }
+}
 
-  if (genderFilter.value !== "all") {
-    filteredItems = filteredItems.filter((item) =>
-      genderFilter.value === "female" ? item.old : !item.old
-    );
-  }
-
-  items.value = filteredItems;
-};
-
-const filterBySize = () => {
-  if (sizeFilter.value !== "all") {
-    items.value = originalItems.value.filter(
-      (item) => item.size == sizeFilter.value
-    );
-  } else {
-    filterByPriceAndGender();
-  }
+const notebookRandom = () => {
+  store
+    .dispatch("getAllNotebooks")
+    .then((data) => {
+      items.value = data;
+    })
+    .catch((error) => {
+      console.error("Ошибка при получении данных:", error);
+    });
 };
 
 onMounted(() => {
-  originalItems.value = [...items.value];
+  if (searchItem.value !== "") {
+    searchNotebook();
+  } else {
+    notebookRandom();
+  }
+});
+
+watch(() => searchItem.value, () => {
+  searchNotebook();
 });
 </script>
 
