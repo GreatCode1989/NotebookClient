@@ -161,6 +161,14 @@ ul.social-icons a:hover {
     background-color: #fff;
 }
 
+.header-logo2 {
+    text-decoration: none;
+
+    color: rgb(155, 215, 66);
+    transition: all .3s;
+    font-size: 25px;
+}
+
 .header-logo {
     text-decoration: none;
 

@@ -2,7 +2,7 @@
   <div>
     <Header @search="searchValue($event)" />
     <div>
-  <NavbarMenu/>
+  <NavbarMenu  @search="searchValue($event)"/>
     </div>
     <div class="container mt-4">
       <!-- Selects -->

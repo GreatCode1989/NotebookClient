@@ -9,6 +9,7 @@ import ProfilePage from "@/views/ProfilePage.vue";
 import FavoritePage from "@/views/FavoritePage.vue";
 import CartPage from "@/views/CartPage.vue";
 import DemoPage from "@/views/DemoPage.vue";
+import DetailPage from "@/views/DetailPage.vue";
 
 const routes = [
   {
@@ -17,12 +18,17 @@ const routes = [
     component: ResumePage,
   },
   {
-    path: "/demo",
+    path: "/detail",
+    name: "detail",
+    component: DetailPage,
+  },
+  {
+    path: "/",
     name: "demo",
     component: DemoPage,
   },
   {
-    path: "/",
+    path: "/catalog",
     name: "catalog",
     component: CatalogPage,
   },

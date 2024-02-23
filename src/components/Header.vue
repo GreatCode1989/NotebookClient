@@ -1,5 +1,5 @@
 <template>
-  <header class="header sticky-top">
+  <header class="header">
     <div class="header-top py-1">
       <div class="container">
         <div class="row">
@@ -42,72 +42,8 @@
           <div class="col-6 col-sm-4">
             <div class="header-top-account d-flex justify-content-end">
               <div class="btn-group me-2">
-                <div v-if="!loggedIn" class="dropdown">
-                  <button
-                    class="btn btn-sm dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    Account
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <router-link :to="{ name: 'login' }" class="dropdown-item"
-                        >Sign In</router-link
-                      >
-                    </li>
-                    <li>
-                      <router-link
-                        :to="{ name: 'register' }"
-                        class="dropdown-item"
-                        >Sign Up</router-link
-                      >
-                    </li>
-                  </ul>
-                </div>
+             
 
-                <div v-if="loggedIn" class="dropdown" style="z-index: 10000">
-                  <button
-                    class="btn btn-sm dropdown-toggle"
-                    type="button"
-                    data-bs-toggle="dropdown"
-                    aria-expanded="false"
-                  >
-                    {{
-                      username.length > 10
-                        ? `${username.slice(0, 10)}...`
-                        : username
-                    }}
-                  </button>
-                  <ul class="dropdown-menu">
-                    <li>
-                      <router-link
-                        :to="{ name: 'profile' }"
-                        class="dropdown-item"
-                        >Profile</router-link
-                      >
-                    </li>
-                    <li>
-                      <router-link
-                        :to="{ name: 'favorite' }"
-                        class="dropdown-item"
-                        >Favorite</router-link
-                      >
-                    </li>
-                    <li>
-                      <hr class="dropdown-divider" />
-                    </li>
-                    <li @click="deleteAccount">
-                      <router-link
-                        :to="{ name: 'resume' }"
-                        @click="deleteAccount"
-                        class="dropdown-item"
-                        >Exit</router-link
-                      >
-                    </li>
-                  </ul>
-                </div>
               </div>
 
               <div class="btn-group">
@@ -122,10 +58,11 @@
                   </button>
                   <ul class="dropdown-menu">
                     <li>
-                      <router-link
-                        :to="{ name: 'resume' }"
+                      <a
+                        href="https://github.com/GreatCode1989"
                         class="dropdown-item"
-                        >Resume</router-link
+                        target="_blank"
+                        >Client</a
                       >
                     </li>
                     <li>
@@ -133,7 +70,7 @@
                         href="https://github.com/GreatCode1989"
                         class="dropdown-item"
                         target="_blank"
-                        >GitHub</a
+                        >Server</a
                       >
                     </li>
                   </ul>
@@ -147,7 +84,7 @@
     </div>
     <!-- ./header-top -->
 
-    <div class="header-middle bg-white py-4">
+    <div class="header-middle bg-white py-4" >
       <div class="container">
         <div class="row align-items-center">
           <div class="col-sm-6">
@@ -155,44 +92,12 @@
               >NotebookeR</router-link
             >
           </div>
-
           <div class="col-sm-6 mt-2 mt-md-0">
-            <form action="">
-              <div class="input-group">
-                <input
-                  type="text"
-                  class="form-control"
-                  name="s"
-                  v-model="searchItem"
-                  placeholder="Search..."
-                  aria-label="Search..."
-                  aria-describedby="button-search"
-                />
-                <button
-                  @click.prevent="searchNotebook"
-                  class="btn btn-outline-warning"
-                  type="submit"
-                  id="button-search"
-                >
-                  <i class="fa-solid fa-magnifying-glass"></i>
-                </button>
-                <span
-                  class="input-group-text"
-                  data-bs-toggle="tooltip"
-                  data-bs-placement="bottom"
-                  :title="cartItemCount > 0 ? 'Товары в корзине' : 'Корзина пуста'"
-                >
-                  <router-link :to="{ name: 'cart' }">
-                    <i
-                      class="fa-solid fa-shopping-cart custom-cart-icon"
-                      style="color: grey"
-                      :class="{ 'text-primary': cartItemCount > 0 }"
-                    ></i>
-                  </router-link>
-                </span>
-              </div>
-            </form>
+
+       <span class="header-logo2 h1 fw-bold">Best laptop of the American</span>
+
           </div>
+
         </div>
       </div>
     </div>
@@ -202,6 +107,7 @@
 
 <script setup>
 import { ref, onMounted } from "vue";
+import CartModal from "./CartModal.vue";
 
 const emit = defineEmits(["search"]);
 
@@ -214,6 +120,14 @@ const props = defineProps({
 const searchItem = ref("");
 const username = ref("");
 const loggedIn = ref(false);
+const isPartIdAdded = (true)
+
+const toggleCartCanvas = () => {
+  const offcanvas = new bootstrap.Offcanvas(
+    document.getElementById("offcanvasCart")
+  );
+  offcanvas.toggle();
+};
 
 const storedToken = localStorage.getItem("tokenData");
 const tokenData = storedToken ? JSON.parse(storedToken) : null;
