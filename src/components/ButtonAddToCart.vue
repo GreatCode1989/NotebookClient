@@ -2,7 +2,7 @@
   <div
   :style="{ color: isPartIdAdded ? 'green' : 'white' }" 
   :class="{ 'btn-primary': !isPartIdAdded, 'btn-warning': isPartIdAdded}"
-    class="btn add-to-cart"
+    class="btn"
   >
     <i @click="handleButtonClick" class="fa-solid fa-shopping-cart"></i>
   </div>

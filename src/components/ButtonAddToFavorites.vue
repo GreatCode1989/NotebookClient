@@ -1,13 +1,12 @@
 <template>
-<div
-    :class="{ 'btn-primary': !isPartIdAdded, 'btn-warning': isPartIdAdded}"
+  <div
+    :class="{ 'btn-primary': !isPartIdAdded, 'btn-warning': isPartIdAdded }"
     class="offer-heart ms-1"
-    :style="{ color: isPartIdAdded ? 'green' : 'white' }" 
+    :style="{ color: isPartIdAdded ? 'green' : 'white' }"
   >
     <i @click="handleButtonClick" class="fas fa-heart heart-icon"></i>
   </div>
 </template>
-
 
 <script setup>
 import { useRouter } from "vue-router";
@@ -94,10 +93,9 @@ const addToCart = () => {
 </script>
 
 <style scoped>
-
 .heart-icon {
-  font-size: 25px; 
-  border-radius: 50%; 
+  font-size: 23px;
+  border-radius: 50%;
   padding-top: 9px;
   cursor: pointer;
 }
@@ -105,4 +103,6 @@ const addToCart = () => {
 .heart-icon :hover {
   background: white;
 }
+
+
 </style>

@@ -7,21 +7,29 @@
             <h2 class="section-title">
               <span>popular products</span>
             </h2>
+            <h4>
+              <span class="scroll">Scroll me</span>
+            </h4>
           </div>
         </div>
 
-        <div class="row">
-          <div
-            class="col-lg-3 col-md-6 col-sm-6 mb-3"
+        <!-- Swiper start -->
+
+        <swiper
+          :slides-per-view="windowWidth"
+          :space-between="20"
+          class="slide-container"
+        >
+          <swiper-slide
+            class="sw-slide"
             v-for="(item, index) in filteredItems"
             :key="index"
           >
             <div class="product-card" style="height: 100%">
               <div class="product-card-offer">
                 <div class="offer-hit ms-1">Hit</div>
-                <div class="offer-new ms-1">New</div>
 
-                <ButtonAddToFavorites />
+                <ButtonAddToFavorites :item="item" />
               </div>
 
               <div class="product-thumb mt-4 mb-2 me-3 ms-3">
@@ -43,8 +51,8 @@
                   <h4>
                     <h4>
                       {{
-                        item.about.slice(0, 80) +
-                        (item.about.length > 80 ? "..." : "")
+                        item.about.slice(0, 70) +
+                        (item.about.length > 70 ? "..." : "")
                       }}
                     </h4>
                   </h4>
@@ -57,26 +65,47 @@
                     <h4>{{ item.price }} $</h4>
                   </div>
                   <div class="product-links">
-                    <ButtonAddToCart />
+                    <ButtonAddToCart :item="item" />
                   </div>
                 </div>
               </div>
             </div>
-          </div>
-        </div>
+          </swiper-slide>
+          ...
+        </swiper>
+
+        <!-- Swiper end -->
       </div>
     </section>
   </div>
 </template>
 
 <script setup>
-import { ref, onMounted, computed } from "vue";
+import { ref, onMounted, onUnmounted, computed, watch } from "vue";
 import { useStore } from "vuex";
 import ButtonAddToCart from "./ButtonAddToCart.vue";
 import ButtonAddToFavorites from "./ButtonAddToFavorites.vue";
+import { Swiper, SwiperSlide } from "swiper/vue";
+
+import "swiper/css";
 
 const store = useStore();
 const items = ref([]);
+const windowWidth = ref();
+
+const handleWindowResize = () => {
+  if (window.innerWidth < 530) {
+    windowWidth.value = 1;
+  } else if (window.innerWidth < 1000) {
+    windowWidth.value = 2;
+  } else if (window.innerWidth < 1200) {
+    windowWidth.value = 3;
+  } else {
+    windowWidth.value = 4;
+  }
+
+  console.log("Windowwidth:", windowWidth.value);
+};
 
 const filteredItems = computed(() => {
   let itemsCopy = [...items.value];
@@ -85,7 +114,7 @@ const filteredItems = computed(() => {
     return item.old;
   });
 
-  return itemsCopy.slice(0, 12);
+  return itemsCopy;
 });
 
 const notebookRandom = () => {
@@ -99,9 +128,27 @@ const notebookRandom = () => {
     });
 };
 
+watch(() => {
+  handleWindowResize();
+});
+
 onMounted(() => {
   notebookRandom();
+  window.addEventListener("resize", handleWindowResize);
+});
+
+onUnmounted(() => {
+  window.removeEventListener("resize", handleWindowResize);
 });
 </script>
 
-<style lang="scss" scoped></style>
+<style scoped>
+.scroll {
+  display: flex;
+  margin: 0 auto;
+  justify-content: center;
+  align-items: center;
+  font-weight: bold;
+  color: rgb(47, 255, 186);
+}
+</style>

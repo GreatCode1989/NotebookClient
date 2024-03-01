@@ -378,7 +378,7 @@ ul.social-icons a:hover {
 
 .product-price {
     font-size: 18px;
-    color: var(--red-color);
+    color: rgb(42, 227, 42);
     font-weight: 600;
 }
 
@@ -659,6 +659,9 @@ footer a:hover {
 }
 
 @media only screen and (max-width : 500px) {
+    
+
+
     .product-content-details .nav-tabs .nav-link {
         padding-left: 8px;
         padding-right: 8px;

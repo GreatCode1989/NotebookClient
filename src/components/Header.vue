@@ -59,7 +59,7 @@
                   <ul class="dropdown-menu">
                     <li>
                       <a
-                        href="https://github.com/GreatCode1989"
+                        href="https://github.com/GreatCode1989/NotebookClient"
                         class="dropdown-item"
                         target="_blank"
                         >Client</a
@@ -67,7 +67,7 @@
                     </li>
                     <li>
                       <a
-                        href="https://github.com/GreatCode1989"
+                        href="https://github.com/GreatCode1989/NotebookServer"
                         class="dropdown-item"
                         target="_blank"
                         >Server</a
