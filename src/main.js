@@ -12,6 +12,7 @@ import './assets/css/main.css'
 
 
 
+
 window.__VUE_PROD_HYDRATION_MISMATCH_DETAILS__ = true;
 
 library.add(faGithub)

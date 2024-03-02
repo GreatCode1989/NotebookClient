@@ -19,7 +19,7 @@
         >
           <div v-for="item in filteredItems" :key="item._id" class="col">
             <div class="card h-100">
-              <router-link :to="{ name: 'details', params: { id: item._id } }">
+              <router-link :to="{ name: 'detail', params: { id: item._id } }">
                 <img
                   :src="require(`../assets/img/${item.image[0]}.jpg`)"
                   :alt="item.name"

@@ -69,12 +69,12 @@ export async function getAllNotebooks({ commit }) {
       throw error;
     });
 }
-export async function fetchClothPartDetails({ commit }, id) {
+export async function notebookPartDetails({ commit }, id) {
   try {
-    const response = await axios.get(`http://localhost:3000/cloth/${id}`);
+    const response = await axios.get(`http://localhost:3000/notebook/${id}`);
 
     if (response.status === 200) {
-      commit("setClothPartDetails", response.data);
+      commit("setNotebookPartDetails", response.data);
       return {
         success: true,
         message: "Успешно получен товар",

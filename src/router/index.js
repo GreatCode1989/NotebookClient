@@ -2,14 +2,13 @@ import { createRouter, createWebHistory } from "vue-router";
 
 import UserRegister from "@/views/UserRegister.vue";
 import UserLogin from "@/views/UserLogin.vue";
-import DetailsPage from "@/views/DetailsPage.vue";
 import CatalogPage from "@/views/CatalogPage.vue";
 import ResumePage from "@/views/ResumePage.vue";
 import ProfilePage from "@/views/ProfilePage.vue";
 import FavoritePage from "@/views/FavoritePage.vue";
 import CartPage from "@/views/CartPage.vue";
 import DemoPage from "@/views/DemoPage.vue";
-import DetailPage from "@/views/DetailPage.vue";
+import DetailsPage from "@/views/DetailsPage.vue";
 
 const routes = [
   {
@@ -18,9 +17,9 @@ const routes = [
     component: ResumePage,
   },
   {
-    path: "/detail",
-    name: "detail",
-    component: DetailPage,
+    path: "/details/:id",
+    name: "details",
+    component: DetailsPage,
   },
   {
     path: "/",
@@ -41,11 +40,6 @@ const routes = [
     path: "/register",
     name: "register",
     component: UserRegister,
-  },
-  {
-    path: "/details/:id",
-    name: "details",
-    component: DetailsPage,
   },
   {
     path: "/profile",

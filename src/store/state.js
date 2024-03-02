@@ -1,4 +1,4 @@
 export default {
   products: [],
-  clothPartDetails: null,
+  notebookPartDetails: null,
 };

@@ -6,6 +6,6 @@ export function searchItem(state, products) {
   state.products = products;
 }
 
-export function setClothPartDetails(state, details) {
-  state.clothPartDetails = details;
+export function setNotebookPartDetails(state, details) {
+  state.notebookPartDetails = details;
 }

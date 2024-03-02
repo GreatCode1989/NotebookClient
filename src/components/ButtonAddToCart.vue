@@ -5,6 +5,7 @@
     class="btn"
   >
     <i @click="handleButtonClick" class="fa-solid fa-shopping-cart"></i>
+    {{ props.text }}
   </div>
   
 </template>
@@ -22,6 +23,10 @@ const props = defineProps({
     type: Object,
     required: true,
   },
+  text: {
+    type: String,
+    default: ''
+  }
 });
 
 const storedToken = localStorage.getItem("tokenData");

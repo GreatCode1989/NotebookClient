@@ -34,7 +34,10 @@
 
               <div class="product-thumb mt-4 mb-2 me-3 ms-3">
                 <router-link
-                  :to="{ name: 'details', params: { id: item._id } }"
+                  :to="{
+                    name: 'details',
+                    params: { id: item._id },
+                  }"
                 >
                   <img
                     :src="require(`../assets/img/${item.image[0]}.jpg`)"
@@ -111,7 +114,7 @@ const filteredItems = computed(() => {
   let itemsCopy = [...items.value];
 
   itemsCopy = itemsCopy.filter((item) => {
-    return item.old;
+    return item.popularity  ;
   });
 
   return itemsCopy;

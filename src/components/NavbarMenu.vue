@@ -33,7 +33,7 @@
         <div class="offcanvas-body" style="background-color: #e3f2fd">
           <ul class="navbar-nav me-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'detail' }"
+              <router-link class="nav-link" :to="{ name: 'resume' }"
                 >Resume</router-link
               >
             </li>
@@ -120,7 +120,7 @@
       <div class="d-none d-lg-flex">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'detail' }"
+            <router-link class="nav-link" :to="{ name: 'catalog' }"
               >Resume</router-link
             >
           </li>
