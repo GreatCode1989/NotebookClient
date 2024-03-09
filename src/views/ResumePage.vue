@@ -26,10 +26,10 @@
           <h3>Frontend Developer</h3>
         </div>
         <p>
-          Hello! I am Anatoliy Trizna, a dedicated Vue.js and Nuxt.js developer
-          with over 2 years of experience. I specialize in creating dynamic and
-          responsive user interfaces using cutting-edge technologies. Below is a
-          summary of my key skills and experiences.
+          Passionate and skilled Full Stack Developer with a focus on building
+          robust and efficient web applications. I specialize in creating
+          seamless user experiences and have hands-on experience with
+          technologies such as Vue.js, Nest.js, and MongoDB.
         </p>
         <div class="btn-box">
           <a
@@ -60,24 +60,147 @@
     <!-- about section design -->
 
     <section class="about" id="about">
-      <h2 class="heading">About <span>Me</span></h2>
+      <h2 class="heading">About My <span>Project</span></h2>
 
       <div class="about-img">
         <img src="../assets/img/my-photo.jpg" alt="Photo" />
+        <span class="circle-spin"></span>
       </div>
 
       <div class="about-content">
-        <h3>Frontend Developer!</h3>
+        <h3>Notebooker - <span>The Best Prices!</span></h3>
         <p>
-          Hello! I am Anatoliy Trizna, a dedicated Vue.js and Nuxt.js developer
-          with over 2 years of experience. I specialize in creating dynamic and
-          responsive user interfaces using cutting-edge technologies. Below is a
-          summary of my key skills and experiences:
+          Passionate Full Stack Developer with hands-on experience showcasing
+          skills through a demo online laptop store. Leveraging the power of
+          Vue3, MongoDB, Nest.js, and JWT for an immersive and secure shopping
+          experience. <br />
+          Crafted an immersive online laptop store experience with seamless
+          client-side navigation through Vue Router, efficient state management
+          using Vuex, visually appealing and responsive UI components powered by
+          Bootstrap 5, and ensured secure user authentication and authorization
+          through JWT, featuring dynamic product listings and interactive
+          elements to engage users.
         </p>
       </div>
 
       <div class="btn-box btns">
         <router-link class="btn" :to="{ name: 'home' }">Store</router-link>
+      </div>
+    </section>
+
+    <!-- education section design -->
+
+    <section class="education" id="education">
+      <h2 class="heading">My <span>Journey</span></h2>
+
+      <div class="education-row">
+        <div class="education-column">
+          <h3 class="title">Education</h3>
+
+          <div class="education-box">
+            <div class="education-content">
+              <div class="content">
+                <div class="year">
+                  <i class="fa-solid fa-calendar-days fw-bold"></i> &nbsp;2006 - 2011
+                </div>
+                <h3>Specialist in Marketing - Alfred Nobel University</h3>
+                <p>
+                  Developed and implemented comprehensive marketing strategies,
+                  conducted in-depth consumer behavior analysis, applied digital
+                  marketing techniques (SEO, social media marketing, and content
+                  creation), and performed thorough market research to identify
+                  trends, competitors, and opportunities for product
+                  positioning.
+                </p>
+              </div>
+            </div>
+
+            <div class="education-content">
+              <div class="content">
+                <div class="year">
+                  <i class="fa-solid fa-calendar-days"></i>&nbsp; 2019-2020
+                </div>
+                <h3>FreeCodeCamp Certification</h3>
+                <p>
+                  Successfully completed the Full Stack Developer certification
+                  on FreeCodeCamp, gaining proficiency in HTML, CSS, JavaScript,
+                  Vue3, Node.js. Applied acquired skills to real-world projects,
+                  solidifying understanding and problem-solving abilities.
+                </p>
+              </div>
+            </div>
+
+            <div class="education-content">
+              <div class="content">
+                <div class="year">
+                  <i class="fa-solid fa-calendar-days"></i>&nbsp; 2020-2021
+                </div>
+                <h3>Frontend Development Training</h3>
+                <p>
+                  Completed specialized training in frontend development,
+                  acquiring proficiency in HTML, CSS, and JavaScript. Developed
+                  practical skills in building responsive and user-friendly web
+                  interfaces.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- experience -->
+
+        <div class="education-column">
+          <h3 class="title">Experience</h3>
+
+          <div class="education-box">
+            <div class="education-content">
+              <div class="content">
+                <div class="year">
+                  <i class="fa-solid fa-calendar-days"></i>&nbsp; 2021-2022
+                </div>
+                <h3>Frontend Developer - Best Solutions</h3>
+                <p>
+                  Collaborating in a dynamic team, I was actively involved in
+                  solving problems using a robust technology stack including Vue
+                  3, JavaScript, and TypeScript. Using advanced tools such as
+                  ElementPlus, Pinia Store, Vue Router, SASS and SCSS, I
+                  specialize in developing Element Plus websites and Single Page
+                  Applications (SPAs).
+                </p>
+              </div>
+            </div>
+
+            <div class="education-content">
+              <div class="content">
+                <div class="year">
+                  <i class="fa-solid fa-calendar-days"></i>&nbsp; 2022-2023
+                </div>
+                <h3>Frontend Developer - CodeCrafters Tech</h3>
+                <p>
+                  Contributed to the development of user interfaces for web
+                  applications using Vue3. Collaborated with backend developers
+                  using Nest.js and MongoDB to ensure seamless integration of
+                  frontend and backend functionalities.
+                </p>
+              </div>
+            </div>
+
+            <div class="education-content">
+              <div class="content">
+                <div class="year">
+                  <i class="fa-solid fa-calendar-days"></i>&nbsp; 2023-2024
+                </div>
+                <h3>Full Stack Developer - Tech Innovators Ltd.</h3>
+                <p>
+                  Currently contributing to the development of innovative web
+                  applications using Vue3 for frontend, Nest.js for backend, and
+                  MongoDB for database management. Implementing scalable and
+                  efficient solutions to meet project requirements.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
       </div>
     </section>
   </div>
@@ -347,6 +470,174 @@ section {
 }
 
 .about {
-  
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  gap: 20px;
+  background: #1a3d57;
+  padding-top: 0;
+}
+
+.heading {
+  font-size: 50px;
+  margin-bottom: 30px;
+  text-align: center;
+  font-weight: 700;
+}
+
+span {
+  color: #00abf0;
+}
+
+.about-img {
+  position: relative;
+  width: 250px;
+  height: 250px;
+  border-radius: 50%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.about-img img {
+  width: 90%;
+  border-radius: 50%;
+  border: 2px solid #00abf0;
+}
+
+.about-img .circle-spin {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%) rotate(0);
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border-top: 2px solid #112e42;
+  border-bottom: 2px solid #112e42;
+  border-left: 2px solid #00abf0;
+  border-right: 2px solid #00abf0;
+}
+
+.about-content {
+  text-align: justify;
+  max-width: 700px;
+}
+
+.about-content h3 {
+  font-size: 27px;
+  font-weight: 700;
+}
+
+.about-content p {
+  font-size: 16px;
+  margin: 20px 0 30px;
+}
+
+.btn-box.btns {
+  display: inline-block;
+  width: 150px;
+}
+
+.btn-box.btns a::before {
+  background: #1a3d57;
+}
+
+.education {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  min-height: auto;
+  padding-bottom: 50px;
+  background: #112e42;
+}
+
+.education .heading {
+  font-weight: 700;
+}
+
+.education .education-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.education-row .education-column {
+  flex: 1 1 400px;
+}
+
+.education-column .title {
+  font-size: 35px;
+  margin: 20px 0 25px 20px;
+  font-weight: 700;
+}
+
+.education-column .education-box {
+  border-left: 2px solid #00abf0;
+}
+
+.education-box .education-content {
+  position: relative;
+  padding-left: 25px ;
+}
+
+.education-box .education-content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -11px;
+  width: 20px;
+  height: 20px;
+  background: #00abf0;
+  border-radius: 50%;
+}
+
+.education-content .content {
+  position: relative;
+  padding: 15px;
+  border: 2px solid #00abf0;
+  border-radius: 7px;
+  margin-bottom: 20px;
+  overflow: hidden;
+  z-index: 1;
+}
+
+.education-content .content::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #1a3d57;
+  z-index: -1;
+  transition: .5s;
+}
+
+.education-content .content:hover::before {
+  width: 100%;
+} 
+
+.education-content .content .year {
+  font-size: 19px;
+  font-weight: 600;
+  color: #00abf0;
+  padding-bottom: 10px;
+}
+
+.education-content .content .year i {
+  padding-right: 5px;
+}
+
+.education-content h3 {
+  font-size: 25px;
+  font-weight: 700;
+}
+
+.education-content p {
+  font-size: 16px;
+  padding-top: 8px;
 }
 </style>
