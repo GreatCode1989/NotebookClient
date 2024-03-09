@@ -101,7 +101,8 @@
             <div class="education-content">
               <div class="content">
                 <div class="year">
-                  <i class="fa-solid fa-calendar-days fw-bold"></i> &nbsp;2006 - 2011
+                  <i class="fa-solid fa-calendar-days fw-bold"></i> &nbsp;2006 -
+                  2011
                 </div>
                 <h3>Specialist in Marketing - Alfred Nobel University</h3>
                 <p>
@@ -197,6 +198,72 @@
                   MongoDB for database management. Implementing scalable and
                   efficient solutions to meet project requirements.
                 </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- skills section design -->
+
+    <section class="skills" id="skills">
+      <h2 class="heading">My <span>Skills</span></h2>
+
+      <div class="skills-row">
+        <div class="skills-column">
+          <h3 class="title">Coding Skills</h3>
+
+          <div class="skills-box">
+            <div class="skills-content">
+              <div class="progressive">
+                <h3>HTML <span>90%</span></h3>
+                <div class="bar"><span></span></div>
+              </div>
+
+              <div class="progressive">
+                <h3>CSS <span>85%</span></h3>
+                <div class="bar"><span></span></div>
+              </div>
+
+              <div class="progressive">
+                <h3>JavaScript <span>70%</span></h3>
+                <div class="bar"><span></span></div>
+              </div>
+
+              <div class="progressive">
+                <h3>TypeScript <span>70%</span></h3>
+                <div class="bar"><span></span></div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- professional skills -->
+
+        <div class="skills-column">
+          <h3 class="title">Professional Skills</h3>
+
+          <div class="skills-box">
+            <div class="skills-content">
+              <div class="progressive">
+                <h3>Vue3 <span>85%</span></h3>
+                <div class="bar"><span></span></div>
+              </div>
+
+              <div class="progressive">
+                <h3>Nuxt 3 <span>70%</span></h3>
+                <div class="bar"><span></span></div>
+              </div>
+
+              <div class="progressive">
+                <h3>Nest <span>95%</span></h3>
+                <div class="bar"><span></span></div>
+              </div>
+
+              <div class="progressive">
+                <h3>MongoDB <span>90%</span></h3>
+                <div class="bar"><span></span></div>
               </div>
             </div>
           </div>
@@ -580,11 +647,11 @@ span {
 
 .education-box .education-content {
   position: relative;
-  padding-left: 25px ;
+  padding-left: 25px;
 }
 
 .education-box .education-content::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: -11px;
@@ -605,7 +672,7 @@ span {
 }
 
 .education-content .content::before {
-  content: '';
+  content: "";
   position: absolute;
   top: 0;
   left: 0;
@@ -613,12 +680,12 @@ span {
   height: 100%;
   background: #1a3d57;
   z-index: -1;
-  transition: .5s;
+  transition: 0.5s;
 }
 
 .education-content .content:hover::before {
   width: 100%;
-} 
+}
 
 .education-content .content .year {
   font-size: 19px;
@@ -639,5 +706,58 @@ span {
 .education-content p {
   font-size: 16px;
   padding-top: 8px;
+}
+
+.skills {
+  min-height: auto;
+  padding-bottom: 70px;
+  background: #1a3d57;
+}
+
+.skills .skills-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 50px;
+}
+
+.skills-row .skills-column {
+  flex: 1 1 400px;
+}
+
+.skills-column .title {
+  font-size: 35px;
+  margin: 20px 0 20px;
+  font-weight: 700;
+}
+
+.skills-box .skills-content {
+  position: relative;
+  border: 2px solid #00abf0;
+  border-radius: 7px;
+  padding: 5px 15px;
+}
+
+.skills-content .progressive {
+  padding: 10px 0;
+}
+
+.skills-content .progressive h3 {
+  font-size: 17px;
+  display: flex;
+  justify-content: space-between;
+  font-weight: 700;
+}
+
+.skills-content .progressive h3 span {
+  color: whitesmoke;
+  font-weight: 700;
+}
+
+.skills-content .progressive .bar {
+  height: 25px;
+  border-radius: 7px;
+  border: 2px solid #00abf0;
+  padding: 5px;
+  margin: 10px 0;
 }
 </style>
