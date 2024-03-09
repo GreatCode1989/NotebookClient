@@ -7,7 +7,7 @@ import ResumePage from "@/views/ResumePage.vue";
 import ProfilePage from "@/views/ProfilePage.vue";
 import FavoritePage from "@/views/FavoritePage.vue";
 import CartPage from "@/views/CartPage.vue";
-import DemoPage from "@/views/DemoPage.vue";
+import HomePage from "@/views/HomePage.vue";
 import DetailsPage from "@/views/DetailsPage.vue";
 
 const routes = [
@@ -23,8 +23,8 @@ const routes = [
   },
   {
     path: "/",
-    name: "demo",
-    component: DemoPage,
+    name: "home",
+    component: HomePage,
   },
   {
     path: "/catalog",

@@ -38,7 +38,7 @@
               >
             </li>
             <li class="nav-item">
-              <router-link class="nav-link" :to="{ name: 'demo' }"
+              <router-link class="nav-link" :to="{ name: 'home' }"
                 >Home</router-link
               >
             </li>
@@ -120,12 +120,12 @@
       <div class="d-none d-lg-flex">
         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'catalog' }"
+            <router-link class="nav-link" :to="{ name: 'resume' }"
               >Resume</router-link
             >
           </li>
           <li class="nav-item">
-            <router-link class="nav-link" :to="{ name: 'demo' }"
+            <router-link class="nav-link" :to="{ name: 'home' }"
               >Home</router-link
             >
           </li>

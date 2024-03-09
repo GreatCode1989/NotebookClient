@@ -114,7 +114,7 @@ const filteredItems = computed(() => {
   let itemsCopy = [...items.value];
 
   itemsCopy = itemsCopy.filter((item) => {
-    return item.popularity  ;
+    return item.popularity   ;
   });
 
   return itemsCopy;

@@ -339,7 +339,6 @@ onMounted(async () => {
 
 .img-girl{
   border-radius: 10px;
- 
   width: 100%;
   object-fit: cover;
 }
