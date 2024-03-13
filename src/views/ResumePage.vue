@@ -12,8 +12,8 @@
         <router-link class="link" :to="{ name: 'home' }">Store</router-link>
         <a href="#about">About</a>
         <a href="#education">Education</a>
-        <a href="skills">Skills</a>
-        <a href="contact">Contact</a>
+        <a href="#skills">Skills</a>
+        <a href="#contact">Contact</a>
       </nav>
     </header>
 
@@ -232,7 +232,7 @@
               </div>
 
               <div class="progressive">
-                <h3>TypeScript <span>70%</span></h3>
+                <h3>TypeScript <span>55%</span></h3>
                 <div class="bar"><span></span></div>
               </div>
             </div>
@@ -270,6 +270,64 @@
         </div>
       </div>
     </section>
+
+    <!-- contact section design -->
+
+    <section class="contact" id="contact">
+      <h2 class="heading">Contact <span>Me!</span></h2>
+
+      <form action="#">
+        <div class="input-box">
+          <div class="input-field">
+            <input type="text" placeholder="Full Name" required />
+            <span class="focus"></span>
+          </div>
+          <div class="input-field">
+            <input type="text" placeholder="Email Address" required />
+            <span class="focus"></span>
+          </div>
+        </div>
+
+        <div class="input-box">
+          <div class="input-field">
+            <input type="number" placeholder="Mobile Number" required />
+            <span class="focus"></span>
+          </div>
+          <div class="input-field">
+            <input type="text" placeholder="Email Subject" required />
+            <span class="focus"></span>
+          </div>
+        </div>
+
+        <div class="textarea-field">
+          <textarea
+            name=""
+            id=""
+            cols="30"
+            rows="10"
+            placeholder="Your Message"
+            required
+          ></textarea>
+          <span class="focus"></span>
+        </div>
+
+        <div class="btn-box btns">
+          <button type="submit" class="btn">Submit</button>
+        </div>
+      </form>
+    </section>
+
+    <!-- footer design -->
+
+    <footer class="footer">
+      <div class="footer-text">
+        <p>Copyright &copy; 2024 by Trizna | All Rights Reserved.</p>
+      </div>
+
+      <div class="footer-iconTop">
+        <a href=""><i class="fa-solid fa-arrow-up"></i></a>
+      </div>
+    </footer>
   </div>
 </template>
 
@@ -367,6 +425,10 @@ section {
   font-size: 54px;
   font-weight: 700;
   line-height: 1.3;
+}
+
+.home-content h1 span {
+  color: whitesmoke;
 }
 
 .home-content .text-animate {
@@ -735,6 +797,24 @@ span {
   border: 2px solid #00abf0;
   border-radius: 7px;
   padding: 5px 15px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.skills-box .skills-content::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #112e42;
+  z-index: -1;
+  transition: 0.5s;
+}
+
+.skills-box .skills-content:hover::before {
+  width: 100%;
 }
 
 .skills-content .progressive {
@@ -759,5 +839,199 @@ span {
   border: 2px solid #00abf0;
   padding: 5px;
   margin: 10px 0;
+}
+
+.skills-content .progressive .bar span {
+  display: block;
+  height: 100%;
+  border-radius: 3px;
+  background: #00abf0;
+}
+
+.skills-column:nth-child(1)
+  .skills-content
+  .progressive:nth-child(1)
+  .bar
+  span {
+  width: 90%;
+}
+.skills-column:nth-child(1)
+  .skills-content
+  .progressive:nth-child(2)
+  .bar
+  span {
+  width: 85%;
+}
+.skills-column:nth-child(1)
+  .skills-content
+  .progressive:nth-child(3)
+  .bar
+  span {
+  width: 70%;
+}
+.skills-column:nth-child(1)
+  .skills-content
+  .progressive:nth-child(4)
+  .bar
+  span {
+  width: 55%;
+}
+
+.skills-column:nth-child(2)
+  .skills-content
+  .progressive:nth-child(1)
+  .bar
+  span {
+  width: 85%;
+}
+.skills-column:nth-child(2)
+  .skills-content
+  .progressive:nth-child(2)
+  .bar
+  span {
+  width: 70%;
+}
+.skills-column:nth-child(2)
+  .skills-content
+  .progressive:nth-child(3)
+  .bar
+  span {
+  width: 95%;
+}
+.skills-column:nth-child(2)
+  .skills-content
+  .progressive:nth-child(4)
+  .bar
+  span {
+  width: 90%;
+}
+
+.contact {
+  min-height: auto;
+  padding-bottom: 70px;
+  background: #112e42;
+}
+
+.contact form {
+  max-width: 700px;
+  margin: 0 auto;
+  text-align: center;
+}
+
+.contact form .input-box {
+  position: relative;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  z-index: 1;
+}
+
+.contact form .input-box .input-field {
+  position: relative;
+  width: 49%;
+  margin: 8px 0;
+}
+
+.contact form .input-box .input-field input,
+.contact form .textarea-field textarea {
+  width: 100%;
+  height: 100%;
+  padding: 15px;
+  font-size: 16px;
+  color: whitesmoke;
+  background: transparent;
+  border-radius: 6px;
+  border: 2px solid #00abf0;
+}
+
+.contact form .input-box .input-field input::placeholder,
+.contact form .textarea-field textarea::placeholder {
+  color: whitesmoke;
+}
+
+.contact form .focus {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  background: #1a3d57;
+  border-radius: 6px;
+  z-index: -1;
+  transition: 0.5s;
+}
+
+.contact form .input-box .input-field input:focus ~ .focus,
+.contact form .input-box .input-field input:valid ~ .focus,
+.contact form .textarea-field textarea:focus ~ .focus,
+.contact form .textarea-field textarea:valid ~ .focus {
+  width: 100%;
+}
+
+.contact form .textarea-field {
+  position: relative;
+  margin: 8px 0 30px;
+  display: flex;
+  z-index: 1;
+}
+
+.contact form .textarea-field textarea {
+  resize: none;
+}
+
+.contact form .btn-box.btns .btn {
+  cursor: pointer;
+}
+
+.footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  padding: 20px 9%;
+  background: #1a3d57;
+}
+
+.footer-text p {
+  font-size: 16px;
+}
+
+.footer-iconTop a {
+  position: relative;
+  display: inline-flex;
+  justify-content: center;
+  align-items: center;
+  padding: 8px;
+  background: #00abf0;
+  border: 2px solid #00abf0;
+  border-radius: 6px;
+  z-index: 1;
+  overflow: hidden;
+}
+
+.footer-iconTop a::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 0;
+  height: 100%;
+  background: #112e42;
+  z-index: -1;
+  transition: 0.5s;
+}
+
+.footer-iconTop a:hover::before {
+  width: 100%;
+}
+
+.footer-iconTop a i {
+  font-size: 24px;
+  color: #112e42;
+  transition: 0.2s;
+}
+
+.footer-iconTop a:hover i {
+  color: #00abf0;
 }
 </style>
