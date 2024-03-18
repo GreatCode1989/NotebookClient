@@ -3,23 +3,27 @@
     <!-- header design -->
 
     <header class="header">
-      <a href="#" class="logo">Anatoliy.</a>
+      <a href="#" class="logo">Anatoliy.<span class="animate" style="--i:1"></span></a>
 
-      <div class="fa-solid fa-bars" id="menu-icon"></div>
+      <div class="fa-solid fa-bars" id="menu-icon"> <span class="animate" style="--i:2"></span>
+      </div>
 
       <nav class="navbar">
         <a href="#home" class="active">Home</a>
-        <router-link class="link" :to="{ name: 'home' }">Store</router-link>
         <a href="#about">About</a>
         <a href="#education">Education</a>
         <a href="#skills">Skills</a>
         <a href="#contact">Contact</a>
+
+        <span class="active-nav"></span>
+        <span class="animate" style="--i:2"></span>
+
       </nav>
     </header>
 
     <!-- home section design -->
 
-    <section class="home" id="home">
+    <section class="home show-animate" id="home">
       <div class="home-content">
         <h1>Hi, I'm <span>Anatoliy Trizna</span></h1>
         <div class="text-animate">
@@ -51,47 +55,51 @@
         <a href="https://www.instagram.com/triznaanatoliy/" target="_blank">
           <i class="fa-brands fa-instagram"></i
         ></a>
-        <a href="https://www.tiktok.com/@user94057772430012" target="_blank">
-          <i class="fa-brands fa-tiktok"></i
-        ></a>
+        <a href="https://github.com/GreatCode1989" target="_blank">
+          <i class="fab fa-github"></i>
+        </a>
       </div>
     </section>
 
     <!-- about section design -->
 
     <section class="about" id="about">
-      <h2 class="heading">About My <span>Project</span></h2>
+      <h2 class="heading about">About My <span>Project</span></h2>
 
       <div class="about-img">
-        <img src="../assets/img/my-photo.jpg" alt="Photo" />
+        <img :src="require('../assets/img/my-photo.jpg')" alt="Photo" />
         <span class="circle-spin"></span>
       </div>
 
       <div class="about-content">
-        <h3>Notebooker - <span>The Best Prices!</span></h3>
+        <h3>CurtainCraft - <span>Best Price!</span></h3>
         <p>
-          Passionate Full Stack Developer with hands-on experience showcasing
-          skills through a demo online laptop store. Leveraging the power of
-          Vue3, MongoDB, Nest.js, and JWT for an immersive and secure shopping
-          experience. <br />
-          Crafted an immersive online laptop store experience with seamless
-          client-side navigation through Vue Router, efficient state management
-          using Vuex, visually appealing and responsive UI components powered by
-          Bootstrap 5, and ensured secure user authentication and authorization
-          through JWT, featuring dynamic product listings and interactive
-          elements to engage users.
+          "Passionate Full Stack Developer with hands-on experience
+          demonstrating skills through a demo online curtain store. Leveraging
+          the power of Vue3, MongoDB, Nest.js, and JWT for an immersive and
+          secure shopping experience. Crafted an immersive online curtain store
+          experience with seamless client-side navigation through Vue Router,
+          efficient state management using Vuex, visually appealing and
+          responsive UI components powered by Bootstrap 5, and ensured secure
+          user authentication and authorization through JWT, featuring dynamic
+          product listings and interactive elements to engage users."
         </p>
       </div>
 
       <div class="btn-box btns">
-        <router-link class="btn" :to="{ name: 'home' }">Store</router-link>
+        <a
+          href="https://greatcode1989.github.io/CurtainCraft/"
+          class="btn"
+          target="_blank"
+          >Store</a
+        >
       </div>
     </section>
 
     <!-- education section design -->
 
     <section class="education" id="education">
-      <h2 class="heading">My <span>Journey</span></h2>
+      <h2 class="heading journey">My <span>Journey</span></h2>
 
       <div class="education-row">
         <div class="education-column">
@@ -189,7 +197,7 @@
             <div class="education-content">
               <div class="content">
                 <div class="year">
-                  <i class="fa-solid fa-calendar-days"></i>&nbsp; 2023-2024
+                  <i class="fa-solid fa-calendar-days"></i>&nbsp; 2023-now
                 </div>
                 <h3>Full Stack Developer - Tech Innovators Ltd.</h3>
                 <p>
@@ -227,12 +235,12 @@
               </div>
 
               <div class="progressive">
-                <h3>JavaScript <span>70%</span></h3>
+                <h3>JavaScript <span>90%</span></h3>
                 <div class="bar"><span></span></div>
               </div>
 
               <div class="progressive">
-                <h3>TypeScript <span>55%</span></h3>
+                <h3>TypeScript <span>70%</span></h3>
                 <div class="bar"><span></span></div>
               </div>
             </div>
@@ -276,21 +284,28 @@
     <section class="contact" id="contact">
       <h2 class="heading">Contact <span>Me!</span></h2>
 
-      <form action="#">
+      <form id="contactForm" action="#contact">
         <div class="input-box">
           <div class="input-field">
             <input type="text" placeholder="Full Name" required />
             <span class="focus"></span>
           </div>
           <div class="input-field">
-            <input type="text" placeholder="Email Address" required />
+            <input type="email" placeholder="Email Address" required />
             <span class="focus"></span>
           </div>
         </div>
 
         <div class="input-box">
           <div class="input-field">
-            <input type="number" placeholder="Mobile Number" required />
+            <input
+              type="tel"
+              pattern="^\+380\d{9}$"
+              placeholder="Mobile Number"
+              title="Please enter a valid Ukrainian phone number starting with +380 and followed by 9 digits"
+              required
+            />
+
             <span class="focus"></span>
           </div>
           <div class="input-field">
@@ -312,7 +327,7 @@
         </div>
 
         <div class="btn-box btns">
-          <button type="submit" class="btn">Submit</button>
+          <button type="submit" class="btn">Send</button>
         </div>
       </form>
     </section>
@@ -325,13 +340,73 @@
       </div>
 
       <div class="footer-iconTop">
-        <a href=""><i class="fa-solid fa-arrow-up"></i></a>
+        <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
       </div>
     </footer>
   </div>
 </template>
 
-<script setup></script>
+<script setup>
+import { onMounted } from 'vue'
+
+onMounted(() => {
+  // toggle icon navbar
+  let navbar = document.querySelector(".navbar");
+  const menuIcon = document.getElementById("menu-icon");
+
+  menuIcon.addEventListener("click", function () {
+    menuIcon.classList.toggle("active");
+    navbar.classList.toggle("active");
+  });
+
+  // scroll sections
+  let sections = document.querySelectorAll("section");
+  let navLinks = document.querySelectorAll("header nav a");
+
+  window.addEventListener("scroll", () => {
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+    });
+
+    // Add active class to the appropriate navLink
+    sections.forEach((sec) => {
+      let top = window.scrollY;
+      let offset = sec.offsetTop - 100;
+      let height = sec.offsetHeight;
+      let id = sec.getAttribute("id");
+
+      if (top >= offset && top < offset + height) {
+        document
+          .querySelector('header nav a[href*="' + id + '"]')
+          .classList.add("active");
+        // active section for animation on scroll
+        sec.classList.add("show-animate");
+      }
+      // if to use animation that repeats on scroll use this
+      else {
+        sec.classList.remove("show-animate");
+      }
+    });
+
+    // sticky header
+    let header = document.querySelector("header");
+    header.classList.toggle("sticky", window.scrollY > 100);
+
+    menuIcon.classList.remove("active");
+    navbar.classList.remove("active");
+  });
+
+  // form reset
+  const form = document.getElementById("contactForm");
+
+  form.addEventListener("submit", function (event) {
+    event.preventDefault();
+
+    form.reset();
+  });
+});
+</script>
+
 
 <style scoped>
 * {
@@ -368,17 +443,27 @@ body {
   left: 0;
   width: 100%;
   padding: 2rem 9%;
-  background: #1a3d57;
+  background: transparent;
   display: flex;
   justify-content: space-between;
   align-items: center;
   z-index: 100;
+  transition: 0.3s;
+}
+
+.header.sticky {
+  background: #1a3d57;
 }
 
 .logo {
+  position: relative;
   font-size: 25px;
   color: whitesmoke;
   font-weight: 600;
+}
+
+.navbar {
+  position: relative;
 }
 
 .navbar a {
@@ -395,10 +480,15 @@ body {
 }
 
 #menu-icon {
-  font-size: 30px;
+  position: relative;
   color: whitesmoke;
   cursor: pointer;
   display: none;
+}
+
+#menu-icon.active::before {
+  content: '\f00d';
+  font-size: 20px;
 }
 
 section {
@@ -433,33 +523,37 @@ section {
 
 .home-content .text-animate {
   position: relative;
-  width: 328px;
+  width: 285px;
+  z-index: 1;
 }
 
 .home-content .text-animate h3 {
   font-size: 32px;
   font-weight: 700;
   color: transparent;
-  -webkit-text-stroke: 0.5px #fff;
+  -webkit-text-stroke: 0.3px #fff;
   background-image: linear-gradient(#00abf0, #00abf0);
   background-repeat: no-repeat;
   -webkit-background-clip: text;
-  background-position: -410px 0;
-
-  animation: animateText 6s linear infinite;
+  background-position: -285px 0;
+  animation: homeBgText 6s linear infinite;
+  
 }
 
-@keyframes animateText {
-  0%,
-  95%,
-  100% {
-    background-position: -410px 0;
-  }
-  65%,
-  85% {
-    background-position: 0 0;
-  }
-}
+/* .home-content .text-animate h3::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 0;
+  height: 100%;
+  border-right: 2px solid #00abf0;
+  z-index: -1;
+  animation: homeCursorText 6s linear infinite;
+  
+} */
+
+
 
 .home-content p {
   font-size: 16px;
@@ -589,14 +683,14 @@ section {
   transition: 0.7s;
 }
 
-.home-imgHover:hover {
+/* .home-imgHover:hover {
   background: url(../assets/img/my-photo.jpg) no-repeat;
   background-position: center;
   background-size: cover;
   width: 300;
   border-radius: 90%;
   opacity: 0.8;
-}
+} */
 
 .about {
   display: flex;
@@ -614,6 +708,11 @@ section {
   text-align: center;
   font-weight: 700;
 }
+
+.about .heading {
+  margin-top: 100px
+}
+
 
 span {
   color: #00abf0;
@@ -643,10 +742,9 @@ span {
   width: 100%;
   height: 100%;
   border-radius: 50%;
-  border-top: 2px solid #112e42;
-  border-bottom: 2px solid #112e42;
   border-left: 2px solid #00abf0;
   border-right: 2px solid #00abf0;
+  animation: aboutSpinner 8s linear infinite;
 }
 
 .about-content {
@@ -685,7 +783,9 @@ span {
 
 .education .heading {
   font-weight: 700;
+  margin-top: 30px;
 }
+
 
 .education .education-row {
   display: flex;
@@ -867,14 +967,14 @@ span {
   .progressive:nth-child(3)
   .bar
   span {
-  width: 70%;
+  width: 90%;
 }
 .skills-column:nth-child(1)
   .skills-content
   .progressive:nth-child(4)
   .bar
   span {
-  width: 55%;
+  width: 70%;
 }
 
 .skills-column:nth-child(2)
@@ -1034,4 +1134,408 @@ span {
 .footer-iconTop a:hover i {
   color: #00abf0;
 }
+
+/* ANIMATION RELOAD AND SCROLL */
+.animate {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 100%;
+  height: 100%;
+  background: yellowgreen;
+  z-index: 98;
+}
+
+.logo .animate,
+.navbar .animate,
+#menu-icon .animate
+{
+  animation: showRight 1s ease forwards;
+  animation-delay: calc(.3s * var(--i));
+}
+
+/* BREAKPOINTS */
+@media (max-width: 1200px) {
+  .logo {
+    font-size: 22px;
+  }
+  .navbar a {
+    font-size: 15px;
+  }
+  #menu-icon {
+    font-size: 27px;
+  }
+  .home-content h1 {
+    font-size: 50px;
+  }
+  .home-content .text-animate h3 {
+    font-size: 28px;
+  }
+  .home-content p {
+    font-size: 13px;
+  }
+  .btn-box .btn {
+    font-size: 14px;
+    width: 130px;
+    height: 90%;
+  }
+  .home-sci {
+    width: 150px;
+  }
+  .home-sci a {
+    width: 37px;
+    height: 37px;
+    font-size: 18px;
+  }
+  .heading {
+    font-size: 44px;
+  }
+  .about-content h3 {
+    font-size: 24px;
+  }
+  .about-content p {
+    font-size: 13px;
+  }
+  .education-column .title {
+    font-size: 32px;
+  }
+  .education-content .content .year {
+    font-size: 15px;
+  }
+  .education-content h3 {
+    font-size: 21px;
+  }
+  .education-content p {
+    font-size: 13px;
+  }
+  .skills-column .title {
+    font-size: 30px;
+  }
+  .skills-content .progressive h3 {
+    font-size: 15px;
+  }
+  .contact form .input-box .input-field input,
+  .contact form .textarea-field textarea
+  {
+    font-size: 14px;
+  }
+  .footer-text p {
+    font-size: 13px;
+  }
+  .footer-iconTop a {
+    padding: 6px;
+  }
+  .footer-iconTop a i {
+    font-size: 20px;
+  }
+}
+
+@media (max-width: 991px) {
+  .header {
+    padding: 20px 4%;
+  }
+  .heading {
+    font-size: 42px;
+  }
+  .about .heading {
+    margin-top: 0;
+  }
+  .education-column .title {
+    font-size: 30px;
+  }
+  .skills-column .title {
+    font-size: 28px;
+  }
+  section {
+    padding: 100px 4% 20px;
+  }
+  .home {
+    padding: 0 4%;
+  }
+  .footer {
+    padding: 20px 4%;
+  }
+}
+
+@media (max-width: 768px) {
+  .header {
+    background: #1a3d57;
+  }
+
+  #menu-icon {
+    display: block;
+    font-size: 20px;
+  }
+
+  .navbar {
+    display: block;
+    position: absolute;
+    top: 100%;
+    left: -100%; 
+    width: 100%;
+    padding: 10px 4%;
+    background: #00abf0;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
+    transition: .25s ease; 
+    transition-delay: .25s;
+    z-index: 1;
+}
+
+.navbar.active {
+    left: 0;
+    transition-delay: 0s;
+}
+
+.navbar .active-nav {
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: #1a3d57;
+  border-top: 1px solid rgba(0, 0, 0, .2);
+  z-index: -1;
+  transition: .25s ease;
+  transition-delay: 0s;
+}
+
+.navbar.active .active-nav {
+  transition-delay: .25s;
+  left: 0;
+}
+
+  .navbar a {
+    display: block;
+    font-size: 15px;
+    margin: 28px 0;
+    transform: rotateX('-200px');
+    transition: .25s;
+    transition-delay: 0s;
+  }
+
+  .navbar.active a {
+    transform: translateX(0);
+    transition-delay: .25s;
+  }
+
+   
+}
+
+@media (max-width: 520px) {
+  .logo {
+    font-size: 18px;
+  }
+  .navbar a {
+    font-size: 14px;
+  }
+  #menu-icon {
+    font-size: 22px;
+  }
+  .home-content h1 {
+    font-size: 35px;
+  }
+  .home-content .text-animate h3 {
+    font-size: 22px;
+   
+  }
+
+  .home-content p {
+    font-size: 12px;
+  }
+  .btn-box .btn {
+    font-size: 13px;
+    width: 120px;
+    height: 85%;
+  }
+  .home-sci {
+    width: 120px;
+  }
+  .home-sci a {
+    width: 32px;
+    height: 32px;
+    font-size: 15px;
+  }
+  .heading {
+    font-size: 35px;
+  }
+  .about-content h3 {
+    font-size: 22px;
+  }
+  .about-content p {
+    font-size: 12px;
+  }
+  .education-column .title {
+    font-size: 27px;
+  }
+  .education-content .content .year {
+    font-size: 14px;
+  }
+  .education-content h3 {
+    font-size: 19px;
+  }
+  .education-content p {
+    font-size: 12px;
+  }
+  .skills-column .title {
+    font-size: 25px;
+  }
+  .skills-content .progressive h3 {
+    font-size: 14px;
+  }
+  .contact form .input-box .input-field input,
+  .contact form .textarea-field textarea
+  {
+    font-size: 12px;
+  }
+  .footer-text p {
+    font-size: 12px;
+  }
+  .footer-iconTop a {
+    padding: 5px;
+  }
+  .footer-iconTop a i {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 470px) {
+  .logo {
+    font-size: 13px;
+  }
+  .header {
+padding: 10px 14px;
+  }
+  .navbar a {
+    font-size: 11px;
+  }
+  #menu-icon {
+    font-size: 15px;
+  }
+  #menu-icon.active::before {
+    font-size: 15px;
+  }
+  .home-content h1 {
+    font-size: 30px;
+  }
+  .home-content .text-animate h3 {
+    font-size: 18px;
+  }
+  .home-content p {
+    font-size: 10px;
+  }
+.btn-box {
+  width: 230px;
+}
+
+  .btn-box .btn {
+    font-size: 10px;
+    width: 100px;
+    height: 70%;
+  }
+  .home-sci {
+    width: 100px;
+    bottom: 70px;
+  }
+  .home-sci a {
+    width: 27px;
+    height: 27px;
+    font-size: 12px;
+  }
+  .heading {
+    margin-top: 30px;
+    font-size: 27px;
+  }
+
+  section {
+    padding: 30px 5%;
+  }
+  .about-content h3 {
+    font-size: 17px;
+  }
+  .about-content p {
+    font-size: 10px;
+  }
+  .education-column .title {
+    font-size: 21px;
+  }
+  .education-content .content .year {
+    font-size: 12px;
+  }
+  .education-content h3 {
+    font-size: 17px;
+  }
+  .education-content p {
+    font-size: 10px;
+  }
+  .skills-column .title {
+    font-size: 21px;
+  }
+  .skills-content .progressive h3 {
+    font-size: 12px;
+  }
+
+  .contact form .input-box .input-field {
+    width: 100%;
+  }
+
+  .contact form .input-box .input-field input,
+  .contact form .textarea-field textarea
+  {
+    font-size: 10px;
+  }
+  .footer-text p {
+    font-size: 10px;
+  }
+  .footer-iconTop a {
+    padding: 4px;
+  }
+  .footer-iconTop a i {
+    font-size: 15px;
+  }
+}
+
+/* keyframes */
+@keyframes homeBgText {
+  0%,
+  10%,
+  100% {
+    background-position: -285px 0;
+  }
+  65%,
+  85% {
+    background-position: 0 0;
+  }
+}
+/* 
+@keyframes homeCursorText {
+  0%,
+  10%,
+  100% {
+    width: 0;
+  }
+
+  65%,
+  78%,
+  85% {
+   width: 100%;
+   opacity: 1;
+  }
+
+  78%,
+  81% {
+    opacity: 0;
+  }
+} */
+
+@keyframes aboutSpinner {
+  100% {
+    transform: translate(-50%, -50%) rotate(360deg);
+  }
+}
+@keyframes showRight {
+  100% {
+    width: 0;
+  }
+}
+
 </style>
