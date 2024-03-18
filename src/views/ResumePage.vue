@@ -3,9 +3,12 @@
     <!-- header design -->
 
     <header class="header">
-      <a href="#" class="logo">Anatoliy.<span class="animate" style="--i:1"></span></a>
+      <a href="#" class="logo"
+        >Anatoliy.<span class="animate" style="--i: 1"></span
+      ></a>
 
-      <div class="fa-solid fa-bars" id="menu-icon"> <span class="animate" style="--i:2"></span>
+      <div class="fa-solid fa-bars" id="menu-icon">
+        <span class="animate" style="--i: 2"></span>
       </div>
 
       <nav class="navbar">
@@ -16,8 +19,7 @@
         <a href="#contact">Contact</a>
 
         <span class="active-nav"></span>
-        <span class="animate" style="--i:2"></span>
-
+        <span class="animate" style="--i: 2"></span>
       </nav>
     </header>
 
@@ -25,15 +27,20 @@
 
     <section class="home show-animate" id="home">
       <div class="home-content">
-        <h1>Hi, I'm <span>Anatoliy Trizna</span></h1>
+        <h1>
+          Hi, I'm <span>Anatoliy Trizna</span>
+          <span class="animate" style="--i: 2"></span>
+        </h1>
         <div class="text-animate">
           <h3>Frontend Developer</h3>
+          <span class="animate" style="--i: 3"></span>
         </div>
         <p>
           Passionate and skilled Full Stack Developer with a focus on building
           robust and efficient web applications. I specialize in creating
           seamless user experiences and have hands-on experience with
           technologies such as Vue.js, Nest.js, and MongoDB.
+          <span class="animate" style="--i: 4"></span>
         </p>
         <div class="btn-box">
           <a
@@ -45,6 +52,7 @@
           <a href="https://t.me/night_coder_one" target="_blank" class="btn"
             >Let's Talk</a
           >
+          <span class="animate" style="--i: 5"></span>
         </div>
       </div>
 
@@ -58,21 +66,29 @@
         <a href="https://github.com/GreatCode1989" target="_blank">
           <i class="fab fa-github"></i>
         </a>
+        <span class="animate" style="--i: 5"></span>
       </div>
     </section>
 
     <!-- about section design -->
 
     <section class="about" id="about">
-      <h2 class="heading about">About My <span>Project</span></h2>
+      <h2 class="heading">
+        About My <span>Project</span
+        ><span class="animate scroll" style="--i: 1"></span>
+      </h2>
 
       <div class="about-img">
         <img :src="require('../assets/img/my-photo.jpg')" alt="Photo" />
         <span class="circle-spin"></span>
+        <span class="animate scroll" style="--i: 2"></span>
       </div>
 
       <div class="about-content">
-        <h3>CurtainCraft - <span>Best Price!</span></h3>
+        <h3>
+          CurtainCraft - <span>Best Price!</span
+          ><span class="animate scroll" style="--i: 3"></span>
+        </h3>
         <p>
           "Passionate Full Stack Developer with hands-on experience
           demonstrating skills through a demo online curtain store. Leveraging
@@ -83,6 +99,7 @@
           responsive UI components powered by Bootstrap 5, and ensured secure
           user authentication and authorization through JWT, featuring dynamic
           product listings and interactive elements to engage users."
+          <span class="animate scroll" style="--i: 5"></span>
         </p>
       </div>
 
@@ -93,17 +110,23 @@
           target="_blank"
           >Store</a
         >
+        <span class="animate scroll" style="--i: 5"></span>
       </div>
     </section>
 
     <!-- education section design -->
 
     <section class="education" id="education">
-      <h2 class="heading journey">My <span>Journey</span></h2>
+      <h2 class="heading journey">
+        My <span>Journey</span>
+        <span class="animate scroll" style="--i: 1"></span>
+      </h2>
 
       <div class="education-row">
         <div class="education-column">
-          <h3 class="title">Education</h3>
+          <h3 class="title">
+            Education<span class="animate scroll" style="--i: 2"></span>
+          </h3>
 
           <div class="education-box">
             <div class="education-content">
@@ -153,6 +176,7 @@
                 </p>
               </div>
             </div>
+            <span class="animate scroll" style="--i: 3"></span>
           </div>
         </div>
 
@@ -347,7 +371,7 @@
 </template>
 
 <script setup>
-import { onMounted } from 'vue'
+import { onMounted } from "vue";
 
 onMounted(() => {
   // toggle icon navbar
@@ -406,7 +430,6 @@ onMounted(() => {
   });
 });
 </script>
-
 
 <style scoped>
 * {
@@ -487,7 +510,7 @@ body {
 }
 
 #menu-icon.active::before {
-  content: '\f00d';
+  content: "\f00d";
   font-size: 20px;
 }
 
@@ -512,6 +535,8 @@ section {
 }
 
 .home-content h1 {
+  position: relative;
+  display: inline-block;
   font-size: 54px;
   font-weight: 700;
   line-height: 1.3;
@@ -523,7 +548,7 @@ section {
 
 .home-content .text-animate {
   position: relative;
-  width: 285px;
+  width: 410px;
   z-index: 1;
 }
 
@@ -537,7 +562,6 @@ section {
   -webkit-background-clip: text;
   background-position: -285px 0;
   animation: homeBgText 6s linear infinite;
-  
 }
 
 /* .home-content .text-animate h3::before {
@@ -553,9 +577,8 @@ section {
   
 } */
 
-
-
 .home-content p {
+  position: relative;
   font-size: 16px;
   margin: 20px 0 40px;
 }
@@ -703,6 +726,7 @@ section {
 }
 
 .heading {
+  position: relative;
   font-size: 50px;
   margin-bottom: 30px;
   text-align: center;
@@ -710,9 +734,8 @@ section {
 }
 
 .about .heading {
-  margin-top: 100px
+  margin-top: 100px;
 }
-
 
 span {
   color: #00abf0;
@@ -753,11 +776,14 @@ span {
 }
 
 .about-content h3 {
+  position: relative;
+  display: inline-block;
   font-size: 27px;
   font-weight: 700;
 }
 
 .about-content p {
+  position: relative;
   font-size: 16px;
   margin: 20px 0 30px;
 }
@@ -786,7 +812,6 @@ span {
   margin-top: 30px;
 }
 
-
 .education .education-row {
   display: flex;
   flex-wrap: wrap;
@@ -798,12 +823,15 @@ span {
 }
 
 .education-column .title {
+  position: relative;
+  display: inline-block;
   font-size: 35px;
   margin: 20px 0 25px 20px;
   font-weight: 700;
 }
 
 .education-column .education-box {
+  position: relative;
   border-left: 2px solid #00abf0;
 }
 
@@ -1148,10 +1176,26 @@ span {
 
 .logo .animate,
 .navbar .animate,
-#menu-icon .animate
-{
+#menu-icon .animate,
+.home.show-animate .animate {
   animation: showRight 1s ease forwards;
-  animation-delay: calc(.3s * var(--i));
+  animation-delay: calc(0.3s * var(--i));
+}
+
+.animate.scroll {
+  transition: 1s ease;
+  transition-delay: calc(0.3s / var(--i));
+  animation: none;
+}
+
+.education .education-box .animate.scroll {
+  width: 105%;
+}
+
+.about.show-animate .animate.scroll,
+.education.show-animate .animate.scroll {
+  transition-delay: calc(0.3s * var(--i));
+  width: 0;
 }
 
 /* BREAKPOINTS */
@@ -1173,6 +1217,9 @@ span {
   }
   .home-content p {
     font-size: 13px;
+  }
+  .btn-box {
+    width: 300px;
   }
   .btn-box .btn {
     font-size: 14px;
@@ -1215,8 +1262,7 @@ span {
     font-size: 15px;
   }
   .contact form .input-box .input-field input,
-  .contact form .textarea-field textarea
-  {
+  .contact form .textarea-field textarea {
     font-size: 14px;
   }
   .footer-text p {
@@ -1271,54 +1317,52 @@ span {
     display: block;
     position: absolute;
     top: 100%;
-    left: -100%; 
+    left: -100%;
     width: 100%;
     padding: 10px 4%;
     background: #00abf0;
-    box-shadow: 0 5px 10px rgba(0, 0, 0, .2);
-    transition: .25s ease; 
-    transition-delay: .25s;
+    box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+    transition: 0.25s ease;
+    transition-delay: 0.25s;
     z-index: 1;
-}
+  }
 
-.navbar.active {
+  .navbar.active {
     left: 0;
     transition-delay: 0s;
-}
+  }
 
-.navbar .active-nav {
-  position: absolute;
-  top: 0;
-  left: -100%;
-  width: 100%;
-  height: 100%;
-  background: #1a3d57;
-  border-top: 1px solid rgba(0, 0, 0, .2);
-  z-index: -1;
-  transition: .25s ease;
-  transition-delay: 0s;
-}
+  .navbar .active-nav {
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: #1a3d57;
+    border-top: 1px solid rgba(0, 0, 0, 0.2);
+    z-index: -1;
+    transition: 0.25s ease;
+    transition-delay: 0s;
+  }
 
-.navbar.active .active-nav {
-  transition-delay: .25s;
-  left: 0;
-}
+  .navbar.active .active-nav {
+    transition-delay: 0.25s;
+    left: 0;
+  }
 
   .navbar a {
     display: block;
     font-size: 15px;
     margin: 28px 0;
-    transform: rotateX('-200px');
-    transition: .25s;
+    transform: rotateX("-200px");
+    transition: 0.25s;
     transition-delay: 0s;
   }
 
   .navbar.active a {
     transform: translateX(0);
-    transition-delay: .25s;
+    transition-delay: 0.25s;
   }
-
-   
 }
 
 @media (max-width: 520px) {
@@ -1336,11 +1380,13 @@ span {
   }
   .home-content .text-animate h3 {
     font-size: 22px;
-   
   }
 
   .home-content p {
     font-size: 12px;
+  }
+  .btn-box {
+    width: 270px;
   }
   .btn-box .btn {
     font-size: 13px;
@@ -1383,8 +1429,7 @@ span {
     font-size: 14px;
   }
   .contact form .input-box .input-field input,
-  .contact form .textarea-field textarea
-  {
+  .contact form .textarea-field textarea {
     font-size: 12px;
   }
   .footer-text p {
@@ -1403,7 +1448,7 @@ span {
     font-size: 13px;
   }
   .header {
-padding: 10px 14px;
+    padding: 10px 14px;
   }
   .navbar a {
     font-size: 11px;
@@ -1423,9 +1468,9 @@ padding: 10px 14px;
   .home-content p {
     font-size: 10px;
   }
-.btn-box {
-  width: 230px;
-}
+  .btn-box {
+    width: 230px;
+  }
 
   .btn-box .btn {
     font-size: 10px;
@@ -1479,8 +1524,7 @@ padding: 10px 14px;
   }
 
   .contact form .input-box .input-field input,
-  .contact form .textarea-field textarea
-  {
+  .contact form .textarea-field textarea {
     font-size: 10px;
   }
   .footer-text p {
@@ -1499,7 +1543,7 @@ padding: 10px 14px;
   0%,
   10%,
   100% {
-    background-position: -285px 0;
+    background-position: -410px 0;
   }
   65%,
   85% {
@@ -1537,5 +1581,4 @@ padding: 10px 14px;
     width: 0;
   }
 }
-
 </style>
