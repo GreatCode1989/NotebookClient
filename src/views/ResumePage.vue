@@ -27,20 +27,15 @@
 
     <section class="home show-animate" id="home">
       <div class="home-content">
-        <h1>
-          Hi, I'm <span>Anatoliy Trizna</span>
-          <span class="animate" style="--i: 2"></span>
-        </h1>
+        <h1>Hi, I'm <span>Anatoliy Trizna</span></h1>
         <div class="text-animate">
           <h3>Frontend Developer</h3>
-          <span class="animate" style="--i: 3"></span>
         </div>
         <p>
           Passionate and skilled Full Stack Developer with a focus on building
           robust and efficient web applications. I specialize in creating
           seamless user experiences and have hands-on experience with
           technologies such as Vue.js, Nest.js, and MongoDB.
-          <span class="animate" style="--i: 4"></span>
         </p>
         <div class="btn-box">
           <a
@@ -52,7 +47,6 @@
           <a href="https://t.me/night_coder_one" target="_blank" class="btn"
             >Let's Talk</a
           >
-          <span class="animate" style="--i: 5"></span>
         </div>
       </div>
 
@@ -66,7 +60,6 @@
         <a href="https://github.com/GreatCode1989" target="_blank">
           <i class="fab fa-github"></i>
         </a>
-        <span class="animate" style="--i: 5"></span>
       </div>
     </section>
 
@@ -183,7 +176,9 @@
         <!-- experience -->
 
         <div class="education-column">
-          <h3 class="title">Experience</h3>
+          <h3 class="title">
+            Experience <span class="animate scroll" style="--i: 5"></span>
+          </h3>
 
           <div class="education-box">
             <div class="education-content">
@@ -232,6 +227,7 @@
                 </p>
               </div>
             </div>
+            <span class="animate scroll" style="--i: 5"></span>
           </div>
         </div>
       </div>
@@ -240,11 +236,16 @@
     <!-- skills section design -->
 
     <section class="skills" id="skills">
-      <h2 class="heading">My <span>Skills</span></h2>
+      <h2 class="heading">
+        My <span>Skills</span
+        ><span class="animate scroll" style="--i: 1"></span>
+      </h2>
 
       <div class="skills-row">
         <div class="skills-column">
-          <h3 class="title">Coding Skills</h3>
+          <h3 class="title">
+            Coding Skills<span class="animate scroll" style="--i: 2"></span>
+          </h3>
 
           <div class="skills-box">
             <div class="skills-content">
@@ -268,13 +269,19 @@
                 <div class="bar"><span></span></div>
               </div>
             </div>
+            <span class="animate scroll" style="--i: 2"></span>
           </div>
         </div>
 
         <!-- professional skills -->
 
         <div class="skills-column">
-          <h3 class="title">Professional Skills</h3>
+          <h3 class="title">
+            Professional Skills<span
+              class="animate scroll"
+              style="--i: 3"
+            ></span>
+          </h3>
 
           <div class="skills-box">
             <div class="skills-content">
@@ -298,6 +305,7 @@
                 <div class="bar"><span></span></div>
               </div>
             </div>
+            <span class="animate scroll" style="--i: 5"></span>
           </div>
         </div>
       </div>
@@ -306,7 +314,10 @@
     <!-- contact section design -->
 
     <section class="contact" id="contact">
-      <h2 class="heading">Contact <span>Me!</span></h2>
+      <h2 class="heading">
+        Contact <span>Me!</span
+        ><span class="animate scroll" style="--i: 1"></span>
+      </h2>
 
       <form id="contactForm" action="#contact">
         <div class="input-box">
@@ -318,6 +329,7 @@
             <input type="email" placeholder="Email Address" required />
             <span class="focus"></span>
           </div>
+          <span class="animate scroll" style="--i: 3"></span>
         </div>
 
         <div class="input-box">
@@ -336,6 +348,7 @@
             <input type="text" placeholder="Email Subject" required />
             <span class="focus"></span>
           </div>
+          <span class="animate scroll" style="--i: 5"></span>
         </div>
 
         <div class="textarea-field">
@@ -348,10 +361,12 @@
             required
           ></textarea>
           <span class="focus"></span>
+          <span class="animate scroll" style="--i: 7"></span>
         </div>
 
         <div class="btn-box btns">
           <button type="submit" class="btn">Send</button>
+          <span class="animate scroll" style="--i: 8"></span>
         </div>
       </form>
     </section>
@@ -361,10 +376,12 @@
     <footer class="footer">
       <div class="footer-text">
         <p>Copyright &copy; 2024 by Trizna | All Rights Reserved.</p>
+        <span class="animate scroll" style="--i: 3"></span>
       </div>
 
       <div class="footer-iconTop">
         <a href="#"><i class="fa-solid fa-arrow-up"></i></a>
+        <span class="animate scroll" style="--i: 4"></span>
       </div>
     </footer>
   </div>
@@ -418,6 +435,15 @@ onMounted(() => {
 
     menuIcon.classList.remove("active");
     navbar.classList.remove("active");
+
+    // animation footer on scroll
+    let footer = document.querySelector("footer");
+
+    footer.classList.toggle(
+      "show-animate",
+      window.innerHeight + window.scrollY >=
+        document.scrollingElement.scrollHeight
+    );
   });
 
   // form reset
@@ -475,7 +501,7 @@ body {
 }
 
 .header.sticky {
-  background: #1a3d57;
+  background: #112e42;
 }
 
 .logo {
@@ -561,6 +587,9 @@ section {
   background-repeat: no-repeat;
   -webkit-background-clip: text;
   background-position: -285px 0;
+}
+
+.home.show-animate .home-content .text-animate h3 {
   animation: homeBgText 6s linear infinite;
 }
 
@@ -904,6 +933,12 @@ span {
   background: #1a3d57;
 }
 
+.skills h2 {
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+}
+
 .skills .skills-row {
   display: flex;
   flex-wrap: wrap;
@@ -915,9 +950,15 @@ span {
 }
 
 .skills-column .title {
+  position: relative;
+  display: inline-block;
   font-size: 35px;
   margin: 20px 0 20px;
   font-weight: 700;
+}
+
+.skills-column .skills-box {
+  position: relative;
 }
 
 .skills-box .skills-content {
@@ -1035,9 +1076,14 @@ span {
 }
 
 .contact {
-  min-height: auto;
-  padding-bottom: 70px;
+  min-height: 900px;
   background: #112e42;
+}
+
+.contact h2 {
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .contact form {
@@ -1120,6 +1166,11 @@ span {
   background: #1a3d57;
 }
 
+.footer-text,
+.footer-iconTop {
+  position: relative;
+}
+
 .footer-text p {
   font-size: 16px;
 }
@@ -1170,7 +1221,7 @@ span {
   right: 0;
   width: 100%;
   height: 100%;
-  background: yellowgreen;
+  background: #112e42;
   z-index: 98;
 }
 
@@ -1188,12 +1239,20 @@ span {
   animation: none;
 }
 
+section:nth-child(odd) .animate.scroll,
+.footer .animate.scroll {
+  background: #1a3d57;
+}
+
 .education .education-box .animate.scroll {
   width: 105%;
 }
 
 .about.show-animate .animate.scroll,
-.education.show-animate .animate.scroll {
+.education.show-animate .animate.scroll,
+.skills.show-animate .animate.scroll,
+.contact.show-animate .animate.scroll,
+.footer.show-animate .animate.scroll {
   transition-delay: calc(0.3s * var(--i));
   width: 0;
 }
